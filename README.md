@@ -1,49 +1,25 @@
-# GLEE Portfolio
+# Portfolio - Gunther Lee Ordinario
 
-A personal portfolio site built with HTML, CSS, JavaScript, and Bootstrap 5.
-
-## Folder Structure
-
-```
-portfolio/
-├── index.html          # Main HTML file
-├── README.md           # This file
-├── css/
-│   └── style.css       # All custom styles & CSS variables
-├── js/
-│   └── main.js         # Scroll reveal, marquee, navbar effects
-└── assets/
-    └── images/         # Place your own photos here
-        └── (your-photo.jpg)
-```
+Personal portfolio website built with HTML, CSS, and JavaScript, designed with a Ghost of Tsushima aesthetic.
 
 ## Features
 
-- **Infinite marquee** testimonials carousel (CSS animation + JS duplication)
-- **Hero portrait** with purple drop-shadow effect
-- **Scroll reveal** animations on all sections
-- **Sticky navbar** with blur + shadow on scroll
-- **Fully responsive** — mobile & desktop layouts
-- **Bootstrap 5** grid + components
+- **Ghost of Tsushima Aesthetic:** Dark theme featuring crimson and parchment gold accents, Japanese typography, and falling leaf animations.
+- **Katana Loading Screen:** Custom katana-shaped progress bar that un-sheathes as the page loads.
+- **Working Contact Form:** Sends submitted messages directly to Gmail using Web3Forms.
+- **Interactive Project Modals:** Click on any project to view tech tags, details, and GitHub links.
+- **GitHub Activity Heatmap:** Dynamically loads contribution history from GitHub.
+- **Responsive Design:** Fits desktop, tablet, and mobile screens.
 
-## How to Use
+## Tech Used
 
-1. Open `index.html` in any browser — no build tools needed.
-2. Replace the hero `<img src="...">` with your own photo in `assets/images/`.
-3. Update the text in `index.html` (name, bio, project descriptions, social links).
-4. Tweak colors in `css/style.css` under the `:root { }` block.
+- HTML5
+- CSS3 (Flexbox & CSS Grid)
+- JavaScript (Vanilla ES6)
+- Web3Forms API (For handling contact submissions)
 
-## Customization
+## Contact
 
-All design tokens live in `css/style.css`:
-
-```css
-:root {
-  --purple-bg: #c084fc;     /* Hero + testimonials background */
-  --purple-dark: #9b5de5;   /* Accent color */
-  --section-bg: #f3e8ff;    /* Socials section background */
-  --footer-bg: #1a0a2e;     /* Footer background */
-}
-```
-
-Change `--purple-bg` to instantly re-theme the whole site.
+- **Name:** Gunther Lee Ordinario
+- **Email:** guntherlee17@gmail.com
+- **GitHub:** [github.com/Clumsy0717](https://github.com/Clumsy0717)

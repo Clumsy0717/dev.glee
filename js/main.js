@@ -56,6 +56,45 @@ if (document.readyState === 'loading') {
 }
 
 /* ============================================================
+   THEME TOGGLE (DIRECTOR'S CUT LIGHT MODE)
+============================================================ */
+function setupThemeToggle() {
+  const toggle = document.getElementById('themeToggle');
+  const savedTheme = localStorage.getItem('theme');
+
+  if (savedTheme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+
+  if (!toggle) return;
+
+  toggle.addEventListener('click', () => {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    if (isLight) {
+      document.documentElement.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+    }
+  });
+}
+
+// Call inside DOMContentLoaded:
+document.addEventListener('DOMContentLoaded', () => {
+  setupThemeToggle();
+  setupNav();
+  setupScrollTop();
+  setupTypewriter();
+  setupModal();
+  setupRevealSlider();
+  renderSkills('all');
+  loadActivity();
+  renderProjects('all');
+  handleNetworkChange();
+});
+
+/* ============================================================
    NAVIGATION
 ============================================================ */
 function setupNav() {
