@@ -266,7 +266,7 @@ a { color: inherit; }
   position: sticky;
   top: 0;
   z-index: 200;
-  background: rgba(17, 18, 22, 0.92);
+  background: var(--nav-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
@@ -1278,4 +1278,95 @@ textarea.input { min-height: 140px; resize: vertical; }
     animation: none !important;
     transition: none !important;
   }
+}
+
+/* ============================================================
+   DESIGN LAYER: Ghost of Tsushima refinement
+   (ink, mist, red sun, katana-edge accents)
+============================================================ */
+:root { --nav-bg: rgba(17, 18, 22, 0.88); }
+[data-theme="light"] { --nav-bg: rgba(244, 241, 234, 0.9); }
+[data-theme="light"] .lv0 { background: rgba(24, 24, 22, 0.08); }
+[data-theme="light"] .input::placeholder { color: #8a8780; }
+
+/* Typography and rhythm */
+body { font-size: 1.0625rem; }
+.section-title { border-left: 0; padding-left: 0; margin-bottom: var(--s-4); }
+.section-title::after {
+  content: '';
+  display: block;
+  width: 72px;
+  height: 2px;
+  margin-top: 1rem;
+  background: linear-gradient(90deg, var(--crimson) 0 62%, var(--gold) 62%);
+}
+.contact-info .section-title { margin-bottom: var(--s-3); }
+.contact-intro { margin-top: 0; }
+.section-head .section-title { margin-bottom: 1rem; }
+
+/* Petals: fewer, quieter, behind content */
+.sakura-container { z-index: 0; }
+.petal { border-radius: 100% 0 100% 0; background: rgba(229, 193, 88, 0.22); }
+.petal:nth-child(n+5) { display: none; }
+
+/* Nav */
+.site-nav.scrolled { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+.scroll-progress {
+  position: absolute; left: 0; bottom: -1px; width: 100%; height: 2px;
+  background: linear-gradient(90deg, var(--crimson), var(--gold));
+  transform: scaleX(var(--progress, 0)); transform-origin: left;
+}
+.nav-link { position: relative; }
+.nav-link::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 2px; height: 2px;
+  background: var(--crimson); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
+.nav-link.active { color: var(--text); }
+
+/* Hero: red sun, mist, katana-guard corners */
+.hero { display: flex; align-items: center; min-height: calc(100svh - var(--nav-h)); overflow: hidden; }
+.hero > .container { position: relative; z-index: 1; }
+.hero::before {
+  content: ''; position: absolute; right: 4%; top: 50%;
+  width: min(48vw, 540px); aspect-ratio: 1; transform: translateY(-50%);
+  border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, rgba(201, 42, 42, 0.30) 0%, rgba(201, 42, 42, 0.10) 52%, transparent 70%);
+}
+.hero::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 28%;
+  background: linear-gradient(to top, var(--bg), transparent); pointer-events: none;
+}
+.hero-name { text-wrap: balance; }
+.hero-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); max-width: 32rem; }
+.hero-stats li { min-width: 0; }
+.hero-card::before, .hero-card::after, .reveal-card::before, .reveal-card::after {
+  content: ''; position: absolute; width: 26px; height: 26px; z-index: 2; pointer-events: none;
+  border: 2px solid var(--gold);
+}
+.hero-card::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; border-top-left-radius: 12px; }
+.hero-card::after  { bottom: -1px; right: -1px; border-left: 0; border-top: 0; border-bottom-right-radius: 12px; }
+.reveal-card::before { top: 8px; left: 8px; border-right: 0; border-bottom: 0; }
+.reveal-card::after  { bottom: 8px; right: 8px; border-left: 0; border-top: 0; }
+.hero-card:hover { transform: none; }
+
+/* Cards: one consistent hover, katana-edge reveal */
+.skill-card, .project-card { position: relative; overflow: hidden; }
+.skill-card::before, .project-card::before {
+  content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 2px;
+  background: linear-gradient(90deg, var(--crimson), var(--gold));
+  transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease;
+}
+.skill-card:hover::before, .project-card:hover::before { transform: scaleX(1); }
+.skill-card:hover, .project-card:hover { transform: none; }
+
+/* About facts */
+.facts { grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); }
+
+/* Mobile */
+@media (max-width: 860px) {
+  .hero { min-height: 0; }
+  .hero::before { right: -20%; top: 22%; width: 80vw; }
+  .nav-link::after { bottom: 6px; }
 }

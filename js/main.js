@@ -80,20 +80,6 @@ function setupThemeToggle() {
   });
 }
 
-// Call inside DOMContentLoaded:
-document.addEventListener('DOMContentLoaded', () => {
-  setupThemeToggle();
-  setupNav();
-  setupScrollTop();
-  setupTypewriter();
-  setupModal();
-  setupRevealSlider();
-  renderSkills('all');
-  loadActivity();
-  renderProjects('all');
-  handleNetworkChange();
-});
-
 /* ============================================================
    NAVIGATION
 ============================================================ */
@@ -134,7 +120,38 @@ function setupScrollTop() {
 }
 
 function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+}
+
+/* Nav state: shadow on scroll, progress bar, active section link */
+function setupScrollSpy() {
+  const nav = document.getElementById('siteNav');
+  const bar = document.getElementById('scrollProgress');
+  const links = Array.from(document.querySelectorAll('.nav-menu a[href^="#"]'));
+  const sections = links.map((a) => document.querySelector(a.getAttribute('href')));
+  let ticking = false;
+
+  function update() {
+    ticking = false;
+    const y = window.scrollY;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    if (nav) nav.classList.toggle('scrolled', y > 8);
+    if (bar) bar.style.setProperty('--progress', max > 0 ? Math.min(y / max, 1) : 0);
+
+    let current = 0;
+    sections.forEach((s, i) => { if (s && s.offsetTop <= y + 160) current = i; });
+    if (max > 0 && y >= max - 4) current = sections.length - 1;
+    links.forEach((a, i) => {
+      a.classList.toggle('active', i === current);
+      if (i === current) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+    });
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
 }
 
 /* ============================================================
@@ -565,7 +582,9 @@ window.addEventListener('offline', handleNetworkChange);
    INIT
 ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
+  setupThemeToggle();
   setupNav();
+  setupScrollSpy();
   setupScrollTop();
   setupTypewriter();
   setupModal();
