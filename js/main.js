@@ -12,6 +12,15 @@ function initLoader() {
     return;
   }
 
+  let seen = false;
+  try { seen = sessionStorage.getItem('loaderSeen') === '1'; } catch (e) {}
+  if (seen || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    loader.remove();
+    document.body.classList.add('ready');
+    return;
+  }
+  try { sessionStorage.setItem('loaderSeen', '1'); } catch (e) {}
+
   const logs = [
     '> UNSHEATHING_BLADE',
     '> HONING_PRECISION',
@@ -247,17 +256,21 @@ const SKILL_CATEGORIES = {
   design: 'Design & Tools'
 };
 
+const DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons';
+const PROTOTYPE_SVG = '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="8" width="36" height="28" rx="3"/><path d="M6 16h36"/><path d="M25 24l13 5-6 2.5-2.5 6z"/></svg>';
+
 const SKILLS = [
-  { name: 'HTML5', cat: 'frontend', desc: 'Semantic, accessible markup and clean page structure.' },
-  { name: 'CSS3', cat: 'frontend', desc: 'Flexbox, Grid, and responsive layouts that hold up on any screen.' },
-  { name: 'JavaScript', cat: 'frontend', desc: 'DOM scripting, events, and interactive interfaces like this portfolio.' },
-  { name: 'Bootstrap', cat: 'frontend', desc: 'Fast responsive layouts using the grid and component system.' },
-  { name: 'PHP', cat: 'backend', desc: 'Server-side logic, form handling, and database-driven pages.' },
-  { name: 'Python', cat: 'backend', desc: 'Desktop apps and scripts, including the Tkinter inventory app.' },
-  { name: 'MySQL', cat: 'database', desc: 'Database design, queries, and CRUD operations.' },
-  { name: 'Figma', cat: 'design', desc: 'User flows and high-fidelity, polished interface designs.' },
-  { name: 'Prototyping', cat: 'design', desc: 'Interactive prototypes to test ideas before building them.' },
-  { name: 'Git and GitHub', cat: 'design', desc: 'Version control and project hosting.' }
+  { name: 'HTML5',       cat: 'frontend', icon: 'html5/html5-original.svg' },
+  { name: 'CSS3',        cat: 'frontend', icon: 'css3/css3-original.svg' },
+  { name: 'JavaScript',  cat: 'frontend', icon: 'javascript/javascript-original.svg' },
+  { name: 'Bootstrap',   cat: 'frontend', icon: 'bootstrap/bootstrap-original.svg' },
+  { name: 'PHP',         cat: 'backend',  icon: 'php/php-original.svg' },
+  { name: 'Python',      cat: 'backend',  icon: 'python/python-original.svg' },
+  { name: 'MySQL',       cat: 'database', icon: 'mysql/mysql-original.svg' },
+  { name: 'Figma',       cat: 'design',   icon: 'figma/figma-original.svg' },
+  { name: 'Prototyping', cat: 'design',   svg: PROTOTYPE_SVG },
+  { name: 'Git',         cat: 'design',   icon: 'git/git-original.svg' },
+  { name: 'GitHub',      cat: 'design',   icon: 'github/github-original.svg', invert: true }
 ];
 
 function renderSkills(filter = 'all') {
@@ -266,14 +279,20 @@ function renderSkills(filter = 'all') {
   container.innerHTML = '';
 
   SKILLS.filter((s) => filter === 'all' || s.cat === filter).forEach((skill) => {
-    const card = document.createElement('article');
-    card.className = 'skill-card';
-    card.innerHTML = `
+    const tile = document.createElement('article');
+    tile.className = 'skill-tile';
+    tile.title = SKILL_CATEGORIES[skill.cat];
+
+    const fallback = `<span class="skill-mono">${skill.name[0]}</span>`;
+    const icon = skill.svg
+      ? skill.svg
+      : `<img src="${DEVICON}/${skill.icon}" alt="" width="48" height="48" loading="lazy" onerror="this.outerHTML='${fallback}'">`;
+
+    tile.innerHTML = `
+      <span class="skill-icon${skill.invert ? ' invert' : ''}">${icon}</span>
       <h3 class="skill-name">${skill.name}</h3>
-      <p class="skill-cat"><span class="cat-dot ${skill.cat}"></span>${SKILL_CATEGORIES[skill.cat]}</p>
-      <p class="skill-desc">${skill.desc}</p>
     `;
-    container.appendChild(card);
+    container.appendChild(tile);
   });
 }
 
@@ -393,7 +412,8 @@ const PROJECTS_DATA = [
     status: 'In development',
     dot: 'orange',
     tags: ['Backend', 'Console App'],
-    link: '#'
+    image: 'images/projects/hotel-management.jpg', // preview picture (put your file here)
+    link: '#'                                       // site URL, shows the "View site" button when set
   },
   {
     id: 'p2',
@@ -403,6 +423,7 @@ const PROJECTS_DATA = [
     status: 'In development',
     dot: 'orange',
     tags: ['Python', 'Tkinter', 'CSV'],
+    image: 'images/projects/grocery-inventory.jpg',
     link: '#'
   },
   {
@@ -413,12 +434,28 @@ const PROJECTS_DATA = [
     status: 'Live',
     dot: 'green',
     tags: ['HTML5', 'CSS3', 'JavaScript'],
+    image: 'images/projects/portfolio.jpg',
     link: 'https://github.com/Clumsy0717'
   }
 ];
 
 function tagsMarkup(tags) {
   return tags.map((t) => `<li class="tag">${t}</li>`).join('');
+}
+
+/* Preview picture with a graceful placeholder if the image is missing */
+function previewInner(proj) {
+  const img = proj.image
+    ? `<img src="${proj.image}" alt="Preview of ${proj.title}" loading="lazy" onerror="this.remove()">`
+    : '';
+  return `<span class="preview-fallback">Preview coming soon</span>${img}`;
+}
+
+function siteButton(proj) {
+  const hasLink = proj.link && proj.link !== '#';
+  return hasLink
+    ? `<a class="btn btn-gold btn-sm" href="${proj.link}" target="_blank" rel="noopener">View site</a>`
+    : `<span class="btn btn-sm btn-disabled" aria-disabled="true">Site coming soon</span>`;
 }
 
 function renderProjects(filterType = 'all') {
@@ -434,11 +471,17 @@ function renderProjects(filterType = 'all') {
     const card = document.createElement('article');
     card.className = 'project-card';
     card.innerHTML = `
-      <p class="project-status"><span class="status-dot ${proj.dot}"></span>${proj.status}</p>
-      <h3 class="project-title">${proj.title}</h3>
-      <p class="project-desc">${proj.desc}</p>
-      <ul class="tag-list">${tagsMarkup(proj.tags)}</ul>
-      <button type="button" class="btn btn-ghost btn-sm project-btn" onclick="openProjectModal('${proj.id}')">View details</button>
+      <div class="project-preview">${previewInner(proj)}</div>
+      <div class="project-body">
+        <p class="project-status"><span class="status-dot ${proj.dot}"></span>${proj.status}</p>
+        <h3 class="project-title">${proj.title}</h3>
+        <p class="project-desc">${proj.desc}</p>
+        <ul class="tag-list">${tagsMarkup(proj.tags)}</ul>
+        <div class="project-actions">
+          ${siteButton(proj)}
+          <button type="button" class="btn btn-ghost btn-sm" onclick="openProjectModal('${proj.id}')">Details</button>
+        </div>
+      </div>
     `;
     container.appendChild(card);
   });
@@ -474,16 +517,8 @@ function openProjectModal(id) {
   const actions = document.getElementById('modalProjectActions');
   actions.innerHTML = '';
 
-  if (proj.link && proj.link !== '#') {
-    const label = proj.link.includes('github.com') ? 'View on GitHub' : 'Open project';
-    const open = document.createElement('a');
-    open.className = 'btn btn-gold btn-sm';
-    open.href = proj.link;
-    open.target = '_blank';
-    open.rel = 'noopener';
-    open.textContent = label;
-    actions.appendChild(open);
-  }
+  document.getElementById('modalProjectPreview').innerHTML = previewInner(proj);
+  actions.insertAdjacentHTML('beforeend', siteButton(proj));
 
   const close = document.createElement('button');
   close.type = 'button';

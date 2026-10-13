@@ -1370,3 +1370,116 @@ body { font-size: 1.0625rem; }
   .hero::before { right: -20%; top: 22%; width: 80vw; }
   .nav-link::after { bottom: 6px; }
 }
+
+
+/* ============================================================
+   SKILLS: icon tiles
+============================================================ */
+#skillsContainer.skills-grid {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--s-2);
+}
+.skill-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: 152px;
+  padding: var(--s-3) var(--s-2);
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  animation: tileIn 0.35s ease both;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.skill-tile::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; width: 100%; height: 2px;
+  background: linear-gradient(90deg, var(--crimson), var(--gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+.skill-tile:hover { border-color: var(--border-strong); background: var(--bg); }
+.skill-tile:hover::before { transform: scaleX(1); }
+.skill-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  color: var(--gold);
+  transition: transform 0.25s ease;
+}
+.skill-tile:hover .skill-icon { transform: translateY(-3px) scale(1.08); }
+.skill-icon img, .skill-icon svg { width: 100%; height: 100%; }
+.skill-icon.invert img { filter: invert(1); }
+[data-theme="light"] .skill-icon.invert img { filter: none; }
+.skill-mono { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--gold); }
+.skill-tile .skill-name { font-size: 0.95rem; letter-spacing: 0.05em; }
+@keyframes tileIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ============================================================
+   PROJECTS: preview + actions
+============================================================ */
+.project-card { padding: 0; gap: 0; align-items: stretch; }
+.project-card::before { z-index: 2; }
+.project-preview {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 72% 28%, rgba(201, 42, 42, 0.24), transparent 55%),
+    linear-gradient(135deg, var(--bg), var(--surface-alt));
+  border-bottom: 1px solid var(--border);
+}
+.preview-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.project-preview img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.project-card:hover .project-preview img { transform: scale(1.04); }
+.project-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  gap: var(--s-2);
+  padding: var(--s-3);
+}
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: var(--s-1);
+}
+.btn-disabled { opacity: 0.55; cursor: not-allowed; pointer-events: none; }
+.modal-card { max-width: 560px; }
+.modal-preview { margin-bottom: var(--s-3); border: 1px solid var(--border); border-radius: var(--radius); }
+
+@media (max-width: 960px) {
+  #skillsContainer.skills-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  #skillsContainer.skills-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
+  .skill-tile { min-height: 124px; padding: var(--s-2) 0.5rem; }
+}
