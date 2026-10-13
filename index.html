@@ -28,10 +28,9 @@
     <div class="petal"></div>
     <div class="petal"></div>
     <div class="petal"></div>
-
   </div>
 
-<!-- Ghost of Tsushima Loading Screen -->
+  <!-- Standard Clean Loading Screen -->
   <div id="pageLoader" aria-hidden="true">
     <!-- Background Watermark Text -->
     <div class="loader-jp-bg">対馬の幽霊</div>
@@ -40,9 +39,7 @@
       <!-- Katana Sword Emblem -->
       <div class="loader-katana-wrap">
         <svg class="loader-katana-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Samurai Helm / Crest Silhouette -->
           <path d="M50 15 C30 15 18 30 18 50 C18 70 30 85 50 85 C70 85 82 70 82 50 C82 30 70 15 50 15 Z" stroke="rgba(229, 193, 88, 0.2)" stroke-width="2" />
-          <!-- Crossed Katana Silhouette -->
           <path d="M25 75 L75 25 M75 25 L70 23 M75 25 L77 30" stroke="var(--gold, #e5c158)" stroke-width="3" stroke-linecap="round" />
           <path d="M25 25 L75 75 M25 25 L30 23 M25 25 L23 30" stroke="var(--crimson, #c92a2a)" stroke-width="3" stroke-linecap="round" />
         </svg>
@@ -80,8 +77,8 @@
     </div>
   </div>
 
-<!-- Toast Popup Notification -->
-<div class="popup" id="popup" role="status" aria-live="polite"></div>
+  <!-- Toast Popup Notification -->
+  <div class="popup" id="popup" role="status" aria-live="polite"></div>
 
   <!-- Project details modal -->
   <div class="modal-overlay" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="modalProjectTitle">
@@ -143,7 +140,7 @@
             <span aria-hidden="true">&gt; <span id="typewriter"></span><span class="caret">_</span></span>
           </div>
 
-          <h1 class="hero-name">GUNTHER LEE.<br /><span>WEB DEVELOPER.</span></h1>
+          <h1 class="hero-name">Hi, I'm Gunther Lee.<br /><span>WEB DEVELOPER.</span></h1>
 
           <p class="hero-bio">
             Information Technology student crafting clean, high-precision web applications. Dedicated to mastering clean code, seamless user experience, and robust backend logic.
@@ -164,36 +161,6 @@
 
         <!-- Profile Card -->
         <div class="hero-card">
-          <!-- Decorative art: katana with its scabbard -->
-          <svg class="card-defs" width="0" height="0" aria-hidden="true" focusable="false">
-            <defs>
-              <linearGradient id="bladeGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#f6f8fa"/>
-                <stop offset="0.45" stop-color="#b4bcc6"/>
-                <stop offset="1" stop-color="#6f7782"/>
-              </linearGradient>
-              <linearGradient id="sayaGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#27508a"/>
-                <stop offset="0.35" stop-color="#0f1d38"/>
-                <stop offset="1" stop-color="#060a14"/>
-              </linearGradient>
-              <linearGradient id="silverGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#f3f5f7"/>
-                <stop offset="0.5" stop-color="#b9bfc7"/>
-                <stop offset="1" stop-color="#e4e7eb"/>
-              </linearGradient>
-              <pattern id="wrapPat" width="14" height="13" patternUnits="userSpaceOnUse">
-                <rect width="14" height="13" fill="#f4f2ec"/>
-                <path d="M7 1.5L12 6.5L7 11.5L2 6.5Z" fill="#111"/>
-              </pattern>
-              <pattern id="twistPat" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(-28)">
-                <path d="M0 4Q4 0 8 4T16 4" fill="none" stroke="#6fb4ef" stroke-opacity=".55" stroke-width="1.4"/>
-                <path d="M0 12Q4 8 8 12T16 12" fill="none" stroke="#2f6fb5" stroke-opacity=".6" stroke-width="1.6"/>
-              </pattern>
-              <clipPath id="sayaClip"><path d="M36 47Q200 30 372 31V44Q200 43 36 55Z"/></clipPath>
-            </defs>
-          </svg>
-
           <div class="card-status-pill">
             <span class="status-pulse"></span> Open for Honor &amp; Work
           </div>
@@ -363,7 +330,6 @@
 
         <div class="form-card">
           <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" onsubmit="submitContactForm(event)">
-            <!-- Replace with your Web3Forms Access Key -->
             <input type="hidden" name="access_key" value="ad25f2f1-9951-48b4-9021-97a56ff78e43">
 
             <div class="field">

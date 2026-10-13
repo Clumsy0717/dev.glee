@@ -1,5 +1,5 @@
 /* ============================================================
-   GHOST OF TSUSHIMA LOADING SCREEN (SHOWS ON EVERY RELOAD)
+   STANDARD CLEAN LOADING SCREEN (NO SLICE EFFECT)
 ============================================================ */
 function initLoader() {
   const loader = document.getElementById('pageLoader');
@@ -46,11 +46,16 @@ function initLoader() {
 
     if (progress >= 100) {
       clearInterval(interval);
+      
+      // Clean fade out when complete
       setTimeout(() => {
         loader.classList.add('hide');
         document.body.classList.add('ready');
-        setTimeout(() => loader.remove(), 800);
-      }, 400);
+        
+        setTimeout(() => {
+          loader.remove();
+        }, 500);
+      }, 300);
     }
   }, 110);
 }
@@ -87,7 +92,7 @@ function setupThemeToggle() {
 }
 
 /* ============================================================
-   KUROSAWA MODE (black and white film look, works with light or dark)
+   KUROSAWA MODE
 ============================================================ */
 function setupKurosawaMode() {
   const btn = document.getElementById('kurosawaToggle');
@@ -302,7 +307,6 @@ function skillChip(skill) {
   return `<li class="skill-chip"><span class="skill-icon${skill.invert ? ' invert' : ''}">${icon}</span><span class="skill-name">${skill.name}</span></li>`;
 }
 
-/* If an icon fails to load, swap it for the skill's first letter */
 function attachIconFallbacks(root) {
   root.querySelectorAll('.skill-icon img').forEach((img) => {
     const swap = () => {
@@ -436,8 +440,8 @@ const PROJECTS_DATA = [
     status: 'In development',
     dot: 'orange',
     tags: ['Backend', 'Console App'],
-    image: 'images/projects/hotel-management.jpg', // preview picture (put your file here)
-    link: '#'                                       // site URL, shows the "View site" button when set
+    image: 'images/projects/hotel-management.jpg',
+    link: '#'
   },
   {
     id: 'p2',
@@ -467,7 +471,6 @@ function tagsMarkup(tags) {
   return tags.map((t) => `<li class="tag">${t}</li>`).join('');
 }
 
-/* Preview picture with a graceful placeholder if the image is missing */
 function previewInner(proj) {
   const img = proj.image
     ? `<img src="${proj.image}" alt="Preview of ${proj.title}" loading="lazy" onerror="this.remove()">`
@@ -597,9 +600,7 @@ async function submitContactForm(event) {
     const result = await response.json();
 
     if (result.success) {
-      // 1. Show the success popup notification
       showPopup('Message Sent Successfully!');
-      // 2. Clear all input texts from the form
       form.reset();
     } else {
       showPopup(result.message || 'Failed to send message. Please try again.');
@@ -619,7 +620,6 @@ function showPopup(text) {
   popupEl.textContent = text;
   popupEl.classList.add('show');
 
-  // Hide the popup automatically after 3.5 seconds
   clearTimeout(showPopup.timer);
   showPopup.timer = setTimeout(() => {
     popupEl.classList.remove('show');

@@ -60,7 +60,7 @@
 }
 
 [data-theme="light"] .petal {
-  background: rgba(196, 154, 43, 0.6); /* Golden ginkgo leaf tone */
+  background: rgba(196, 154, 43, 0.6);
 }
 
 /* Theme Toggle Button */
@@ -138,7 +138,7 @@ a { color: inherit; }
 .section-title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
   line-height: 1.15;
   letter-spacing: 0.05em;
   margin-bottom: var(--s-4);
@@ -196,10 +196,10 @@ a { color: inherit; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
-  padding: 0.75rem 1.6rem;
+  min-height: 44px;
+  padding: 0.65rem 1.35rem;
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -256,7 +256,7 @@ a { color: inherit; }
   border-color: var(--border-strong);
 }
 
-.btn-sm    { min-height: 40px; padding: 0.5rem 1.25rem; font-size: 0.85rem; }
+.btn-sm    { min-height: 38px; padding: 0.45rem 1.1rem; font-size: 0.8rem; }
 .btn-block { width: 100%; }
 
 /* ============================================================
@@ -324,7 +324,7 @@ a { color: inherit; }
 ============================================================ */
 .hero {
   position: relative;
-  padding-block: clamp(4rem, 8vw, 7.5rem);
+  padding-block: clamp(3.5rem, 6vw, 5.5rem);
 }
 .hero-grid {
   position: relative;
@@ -338,9 +338,9 @@ a { color: inherit; }
   display: inline-flex;
   align-items: center;
   margin-bottom: var(--s-2);
-  padding: 0.45rem 1.1rem;
+  padding: 0.35rem 0.9rem;
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--gold);
   background: var(--surface);
@@ -362,23 +362,23 @@ a { color: inherit; }
 .hero-name {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(3rem, 6.5vw, 5rem);
-  line-height: 1;
-  letter-spacing: 0.04em;
+  font-size: clamp(2.1rem, 4.2vw, 3.25rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
   color: var(--text);
 }
 .hero-name span {
   color: var(--gold);
   display: inline-block;
-  margin-top: 0.25rem;
-  font-size: clamp(2.3rem, 5vw, 4rem);
+  margin-top: 0.2rem;
+  font-size: clamp(1.8rem, 3.5vw, 2.75rem);
 }
 .hero-bio {
-  max-width: 52ch;
-  margin-top: var(--s-3);
-  font-size: 1.05rem;
+  max-width: 50ch;
+  margin-top: 1rem;
+  font-size: 0.95rem;
   color: var(--muted);
-  line-height: 1.7;
+  line-height: 1.65;
 }
 
 /* Stat tiles */
@@ -386,27 +386,27 @@ a { color: inherit; }
   display: flex;
   flex-wrap: wrap;
   gap: var(--s-2);
-  margin-top: var(--s-4);
+  margin-top: var(--s-3);
 }
 .hero-stats li {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  min-width: 8.5rem;
-  padding: 0.9rem 1.25rem;
+  gap: 0.2rem;
+  min-width: 7.5rem;
+  padding: 0.75rem 1rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
 }
 .stat-value {
   font-family: var(--font-mono);
-  font-size: 1.35rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--gold);
 }
 .stat-label {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
+  font-size: 0.65rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--muted);
@@ -416,7 +416,7 @@ a { color: inherit; }
   display: flex;
   flex-wrap: wrap;
   gap: var(--s-2);
-  margin-top: var(--s-4);
+  margin-top: var(--s-3);
 }
 
 /* Profile Card */
@@ -593,14 +593,14 @@ body.ready .hero-card { animation: rise 0.8s 0.15s cubic-bezier(0.2, 0.7, 0.2, 1
   padding-left: 1.25rem;
   border-left: 3px solid var(--gold);
   font-family: var(--font-display);
-  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
   line-height: 1.35;
   letter-spacing: 0.03em;
   color: var(--text);
 }
 .about-text {
   max-width: 60ch;
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--muted);
 }
 .facts {
@@ -955,7 +955,7 @@ textarea.input { min-height: 140px; resize: vertical; }
 .scroll-top-btn:hover { background: var(--gold-hover); transform: translateY(-2px); }
 
 /* ============================================================
-   TOAST, LOADER, OFFLINE
+   TOAST, CLEAN LOADER, OFFLINE
 ============================================================ */
 .popup {
   position: fixed;
@@ -976,9 +976,6 @@ textarea.input { min-height: 140px; resize: vertical; }
 }
 .popup.show { opacity: 1; transform: none; }
 
-/* ============================================================
-   GHOST OF TSUSHIMA LOADING SCREEN (SWORD EDITION)
-============================================================ */
 #pageLoader {
   position: fixed;
   inset: 0;
@@ -989,7 +986,7 @@ textarea.input { min-height: 140px; resize: vertical; }
   background: #0d0e12;
   color: #e6e4df;
   overflow: hidden;
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 #pageLoader.hide {
@@ -1015,7 +1012,7 @@ textarea.input { min-height: 140px; resize: vertical; }
 
 .loader-content {
   position: relative;
-  z-index: 2;
+  z-index: 7;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1223,7 +1220,6 @@ textarea.input { min-height: 140px; resize: vertical; }
 
 /* ============================================================
    DESIGN LAYER: Ghost of Tsushima refinement
-   (ink, mist, red sun, katana-edge accents)
 ============================================================ */
 :root { --nav-bg: rgba(17, 18, 22, 0.88); }
 [data-theme="light"] { --nav-bg: rgba(244, 241, 234, 0.9); }
@@ -1231,7 +1227,7 @@ textarea.input { min-height: 140px; resize: vertical; }
 [data-theme="light"] .input::placeholder { color: #8a8780; }
 
 /* Typography and rhythm */
-body { font-size: 1.0625rem; }
+body { font-size: 1rem; }
 .section-title { border-left: 0; padding-left: 0; margin-bottom: var(--s-4); }
 .section-title::after {
   content: '';
@@ -1266,8 +1262,8 @@ body { font-size: 1.0625rem; }
 .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
 .nav-link.active { color: var(--text); }
 
-/* Hero: red sun, mist, katana-guard corners */
-.hero { display: flex; align-items: center; min-height: calc(100svh - var(--nav-h)); overflow: hidden; }
+/* Hero */
+.hero { display: flex; align-items: center; min-height: auto; overflow: hidden; }
 .hero > .container { position: relative; z-index: 1; }
 .hero::before {
   content: ''; position: absolute; right: 4%; top: 50%;
@@ -1280,11 +1276,11 @@ body { font-size: 1.0625rem; }
   background: linear-gradient(to top, var(--bg), transparent); pointer-events: none;
 }
 .hero-name { text-wrap: balance; }
-.hero-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); max-width: 32rem; }
+.hero-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr)); max-width: 28rem; }
 .hero-stats li { min-width: 0; }
 .hero-card:hover { transform: none; }
 
-/* Cards: one consistent hover, katana-edge reveal */
+/* Cards */
 .project-card { position: relative; overflow: hidden; }
 .project-card::before {
   content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 2px;
@@ -1303,7 +1299,6 @@ body { font-size: 1.0625rem; }
   .hero::before { right: -20%; top: 22%; width: 80vw; }
   .nav-link::after { bottom: 6px; }
 }
-
 
 /* ============================================================
    PROJECTS: preview + actions
@@ -1358,10 +1353,8 @@ body { font-size: 1.0625rem; }
 .modal-card { max-width: 560px; }
 .modal-preview { margin-bottom: var(--s-3); border: 1px solid var(--border); border-radius: var(--radius); }
 
-
-
 /* ============================================================
-   NAV: attached at the top, floats as a pill after scrolling
+   NAV: attached at top, floats as pill on scroll
 ============================================================ */
 body { padding-top: var(--nav-h); }
 .site-nav {
@@ -1490,12 +1483,8 @@ body { padding-top: var(--nav-h); }
   .arsenal-row { grid-template-columns: minmax(0, 1fr); gap: var(--s-2); padding: var(--s-3) var(--s-2); }
 }
 
-
 /* ============================================================
    KUROSAWA MODE
-   Black and white film look, layered on top of light or dark.
-   A fixed backdrop-filter layer desaturates everything without
-   touching layout, so fixed elements (nav, modal) keep working.
 ============================================================ */
 .mode-toggle {
   height: 38px;
@@ -1559,19 +1548,15 @@ html[data-mode="kurosawa"] .film-overlay { opacity: 1; visibility: visible; }
   .mode-toggle { padding: 0 0.55rem; }
 }
 
-
 /* ============================================================
-   HERO CARD: katana, red sun portrait
+   HERO CARD
 ============================================================ */
-
-/* Portrait on a red sun disc */
 .card-photo {
   position: relative;
   background: linear-gradient(180deg, var(--surface-alt), var(--bg));
 }
 .card-photo img { position: relative; }
 
-/* Live status dot */
 .status-pulse { animation: statusPulse 2.4s ease-in-out infinite; }
 @keyframes statusPulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(229, 193, 88, 0.55); }
@@ -1580,22 +1565,4 @@ html[data-mode="kurosawa"] .film-overlay { opacity: 1; visibility: visible; }
 
 @media (max-width: 860px) {
   .hero-card { margin-bottom: var(--s-4); }
-}
-
-
-
-/* Katana resting across the bottom-right of the hero card */
-.card-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
-.katana {
-  position: absolute;
-  z-index: 3;
-  right: -5%;
-  bottom: -36px;
-  width: 122%;
-  height: auto;
-  overflow: visible;
-  pointer-events: none;
-  transform: rotate(-3.5deg);
-  transform-origin: right center;
-  filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.45));
 }
