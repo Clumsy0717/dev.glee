@@ -1282,14 +1282,6 @@ body { font-size: 1.0625rem; }
 .hero-name { text-wrap: balance; }
 .hero-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); max-width: 32rem; }
 .hero-stats li { min-width: 0; }
-.hero-card::before, .hero-card::after, .reveal-card::before, .reveal-card::after {
-  content: ''; position: absolute; width: 26px; height: 26px; z-index: 2; pointer-events: none;
-  border: 2px solid var(--gold);
-}
-.hero-card::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; border-top-left-radius: 12px; }
-.hero-card::after  { bottom: -1px; right: -1px; border-left: 0; border-top: 0; border-bottom-right-radius: 12px; }
-.reveal-card::before { top: 8px; left: 8px; border-right: 0; border-bottom: 0; }
-.reveal-card::after  { bottom: 8px; right: 8px; border-left: 0; border-top: 0; }
 .hero-card:hover { transform: none; }
 
 /* Cards: one consistent hover, katana-edge reveal */
@@ -1565,4 +1557,45 @@ html[data-mode="kurosawa"] .film-overlay { opacity: 1; visibility: visible; }
 @media (max-width: 380px) {
   .nav-actions { gap: 0.5rem; }
   .mode-toggle { padding: 0 0.55rem; }
+}
+
+
+/* ============================================================
+   HERO CARD: katana, red sun portrait
+============================================================ */
+
+/* Portrait on a red sun disc */
+.card-photo {
+  position: relative;
+  background: linear-gradient(180deg, var(--surface-alt), var(--bg));
+}
+.card-photo img { position: relative; }
+
+/* Live status dot */
+.status-pulse { animation: statusPulse 2.4s ease-in-out infinite; }
+@keyframes statusPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(229, 193, 88, 0.55); }
+  50%      { box-shadow: 0 0 0 6px rgba(229, 193, 88, 0); }
+}
+
+@media (max-width: 860px) {
+  .hero-card { margin-bottom: var(--s-4); }
+}
+
+
+
+/* Katana resting across the bottom-right of the hero card */
+.card-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.katana {
+  position: absolute;
+  z-index: 3;
+  right: -5%;
+  bottom: -36px;
+  width: 122%;
+  height: auto;
+  overflow: visible;
+  pointer-events: none;
+  transform: rotate(-3.5deg);
+  transform-origin: right center;
+  filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.45));
 }
