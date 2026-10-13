@@ -1,5 +1,5 @@
 /* ============================================================
-   GHOST OF TSUSHIMA LOADING SCREEN
+   GHOST OF TSUSHIMA LOADING SCREEN (SHOWS ON EVERY RELOAD)
 ============================================================ */
 function initLoader() {
   const loader = document.getElementById('pageLoader');
@@ -12,14 +12,11 @@ function initLoader() {
     return;
   }
 
-  let seen = false;
-  try { seen = sessionStorage.getItem('loaderSeen') === '1'; } catch (e) {}
-  if (seen || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     loader.remove();
     document.body.classList.add('ready');
     return;
   }
-  try { sessionStorage.setItem('loaderSeen', '1'); } catch (e) {}
 
   const logs = [
     '> UNSHEATHING_BLADE',
