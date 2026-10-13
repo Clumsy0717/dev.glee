@@ -271,12 +271,6 @@ a { color: inherit; }
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
-.nav-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: var(--nav-h);
-}
 
 .brand {
   display: inline-flex;
@@ -638,57 +632,6 @@ body.ready .hero-card { animation: rise 0.8s 0.15s cubic-bezier(0.2, 0.7, 0.2, 1
   gap: var(--s-2);
 }
 
-/* ============================================================
-   SKILLS
-============================================================ */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--s-3);
-}
-.skill-card {
-  padding: var(--s-3);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: transform 0.2s, border-color 0.2s;
-}
-.skill-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--gold);
-}
-.skill-name {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.45rem;
-  letter-spacing: 0.03em;
-  color: var(--text);
-}
-.skill-cat {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.35rem;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--muted);
-}
-.skill-desc {
-  margin-top: var(--s-2);
-  font-size: 0.9375rem;
-  color: var(--muted);
-}
-.cat-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.cat-dot.frontend { background: var(--crimson); }
-.cat-dot.backend  { background: var(--gold); }
-.cat-dot.database { background: #00d4e0; }
-.cat-dot.design   { background: #a855f7; }
-
 /* GitHub activity */
 .activity {
   margin-top: var(--s-5);
@@ -1036,7 +979,7 @@ textarea.input { min-height: 140px; resize: vertical; }
 /* ============================================================
    GHOST OF TSUSHIMA LOADING SCREEN (SWORD EDITION)
 ============================================================ */
-#skeleton-loader {
+#pageLoader {
   position: fixed;
   inset: 0;
   z-index: 9999;
@@ -1049,7 +992,7 @@ textarea.input { min-height: 140px; resize: vertical; }
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
 }
 
-#skeleton-loader.hide {
+#pageLoader.hide {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -1204,7 +1147,7 @@ textarea.input { min-height: 140px; resize: vertical; }
   color: #e6e4df;
 }
 
-#offline-screen {
+#offlineScreen {
   position: fixed;
   inset: 0;
   z-index: 10000;
@@ -1228,7 +1171,6 @@ textarea.input { min-height: 140px; resize: vertical; }
    RESPONSIVE
 ============================================================ */
 @media (max-width: 960px) {
-  .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 860px) {
@@ -1263,7 +1205,6 @@ textarea.input { min-height: 140px; resize: vertical; }
 }
 
 @media (max-width: 640px) {
-  .skills-grid { grid-template-columns: minmax(0, 1fr); }
   .facts { grid-template-columns: minmax(0, 1fr); gap: var(--s-2); }
   .projects-grid { grid-template-columns: minmax(0, 1fr); }
   .contact-list li { grid-template-columns: 5rem 1fr; }
@@ -1352,14 +1293,14 @@ body { font-size: 1.0625rem; }
 .hero-card:hover { transform: none; }
 
 /* Cards: one consistent hover, katana-edge reveal */
-.skill-card, .project-card { position: relative; overflow: hidden; }
-.skill-card::before, .project-card::before {
+.project-card { position: relative; overflow: hidden; }
+.project-card::before {
   content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 2px;
   background: linear-gradient(90deg, var(--crimson), var(--gold));
   transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease;
 }
-.skill-card:hover::before, .project-card:hover::before { transform: scaleX(1); }
-.skill-card:hover, .project-card:hover { transform: none; }
+.project-card:hover::before { transform: scaleX(1); }
+.project-card:hover { transform: none; }
 
 /* About facts */
 .facts { grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); }
@@ -1371,57 +1312,6 @@ body { font-size: 1.0625rem; }
   .nav-link::after { bottom: 6px; }
 }
 
-
-/* ============================================================
-   SKILLS: icon tiles
-============================================================ */
-#skillsContainer.skills-grid {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: var(--s-2);
-}
-.skill-tile {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  min-height: 152px;
-  padding: var(--s-3) var(--s-2);
-  text-align: center;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  animation: tileIn 0.35s ease both;
-  transition: border-color 0.2s, background-color 0.2s;
-}
-.skill-tile::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; width: 100%; height: 2px;
-  background: linear-gradient(90deg, var(--crimson), var(--gold));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.35s ease;
-}
-.skill-tile:hover { border-color: var(--border-strong); background: var(--bg); }
-.skill-tile:hover::before { transform: scaleX(1); }
-.skill-icon {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  color: var(--gold);
-  transition: transform 0.25s ease;
-}
-.skill-tile:hover .skill-icon { transform: translateY(-3px) scale(1.08); }
-.skill-icon img, .skill-icon svg { width: 100%; height: 100%; }
-.skill-icon.invert img { filter: invert(1); }
-[data-theme="light"] .skill-icon.invert img { filter: none; }
-.skill-mono { font-family: var(--font-display); font-size: 2rem; font-weight: 700; color: var(--gold); }
-.skill-tile .skill-name { font-size: 0.95rem; letter-spacing: 0.05em; }
-@keyframes tileIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
 /* ============================================================
    PROJECTS: preview + actions
@@ -1476,10 +1366,203 @@ body { font-size: 1.0625rem; }
 .modal-card { max-width: 560px; }
 .modal-preview { margin-bottom: var(--s-3); border: 1px solid var(--border); border-radius: var(--radius); }
 
-@media (max-width: 960px) {
-  #skillsContainer.skills-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+
+/* ============================================================
+   NAV: attached at the top, floats as a pill after scrolling
+============================================================ */
+body { padding-top: var(--nav-h); }
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  padding: 0;
+  background: transparent; border: 0;
+  backdrop-filter: none; -webkit-backdrop-filter: none;
+  box-shadow: none;
+  transition: padding 0.35s ease;
+}
+.nav-shell {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--s-3);
+  width: 100%; max-width: 100%;
+  height: var(--nav-h);
+  margin-inline: auto;
+  padding-inline: max(var(--gutter), calc((100% - 1140px) / 2));
+  background: var(--nav-bg);
+  border: 1px solid transparent;
+  border-bottom-color: var(--border);
+  border-radius: 0;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: max-width 0.35s ease, height 0.35s ease, padding 0.35s ease,
+              border-radius 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.site-nav.scrolled { padding: 12px var(--gutter) 0; box-shadow: none; }
+.site-nav.scrolled .nav-shell {
+  max-width: 1140px; height: 64px;
+  padding-inline: 1.5rem;
+  border-color: var(--border-strong);
+  border-radius: 16px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+}
+[data-theme="light"] .site-nav.scrolled .nav-shell { box-shadow: 0 14px 40px rgba(24, 24, 22, 0.14); }
+
+.brand { justify-self: start; }
+.nav-menu { gap: var(--s-4); }
+.nav-link {
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+}
+.nav-actions { display: flex; align-items: center; gap: 0.75rem; justify-self: end; }
+.nav-cta { border-radius: 12px; }
+.theme-toggle { border-radius: 10px; }
+.nav-menu-contact { display: none; }
+.scroll-progress { left: 0; right: 0; width: auto; bottom: 0; }
+.site-nav.scrolled .scroll-progress { left: 16px; right: 16px; }
+
+@media (max-width: 860px) {
+  .nav-shell { display: flex; justify-content: space-between; padding-inline: var(--gutter); }
+  .site-nav.scrolled .nav-shell { padding-inline: 1.1rem; }
+  .nav-toggle { display: inline-flex; }
+  .nav-menu {
+    display: none; position: absolute; top: calc(100% + 10px);
+    left: var(--gutter); right: var(--gutter);
+    flex-direction: column; align-items: stretch; gap: 0;
+    padding: 0.5rem 1.25rem 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border-strong); border-radius: 14px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+  }
+  .site-nav.scrolled .nav-menu { left: 0; right: 0; }
+  .site-nav.open .nav-menu { display: flex; }
+  .nav-menu .nav-link { display: block; padding: 0.95rem 0; border-bottom: 1px solid var(--border); }
+  .nav-menu li:last-child .nav-link { border-bottom: 0; }
 }
 @media (max-width: 640px) {
-  #skillsContainer.skills-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
-  .skill-tile { min-height: 124px; padding: var(--s-2) 0.5rem; }
+  .nav-cta { display: none; }
+  .nav-menu-contact { display: block; }
+}
+
+/* ============================================================
+   ARSENAL: skills grouped by discipline
+============================================================ */
+.arsenal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.arsenal-row {
+  display: grid;
+  grid-template-columns: minmax(0, 230px) minmax(0, 1fr);
+  gap: var(--s-3);
+  align-items: center;
+  padding: var(--s-3) var(--s-4);
+}
+.arsenal-row + .arsenal-row { border-top: 1px solid var(--border); }
+.arsenal-label { display: flex; align-items: center; gap: 1rem; }
+.arsenal-jp {
+  font-family: 'Noto Serif JP', var(--font-display), serif;
+  font-size: 1.9rem; line-height: 1;
+  color: var(--crimson);
+}
+.arsenal-label h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.arsenal-items { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.skill-chip {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  padding: 0.6rem 1.1rem 0.6rem 0.8rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.skill-chip:hover { border-color: var(--gold); transform: translateY(-2px); }
+.skill-chip .skill-name {
+  font-family: var(--font-body);
+  font-size: 0.95rem; font-weight: 600; letter-spacing: 0.01em;
+  color: var(--text);
+}
+.skill-icon { display: grid; place-items: center; width: 28px; height: 28px; color: var(--gold); }
+.skill-icon img, .skill-icon svg { width: 100%; height: 100%; }
+.skill-icon.invert img { filter: invert(1); }
+[data-theme="light"] .skill-icon.invert img { filter: none; }
+.skill-mono { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--gold); }
+
+@media (max-width: 860px) {
+  .arsenal-row { grid-template-columns: minmax(0, 1fr); gap: var(--s-2); padding: var(--s-3) var(--s-2); }
+}
+
+
+/* ============================================================
+   KUROSAWA MODE
+   Black and white film look, layered on top of light or dark.
+   A fixed backdrop-filter layer desaturates everything without
+   touching layout, so fixed elements (nav, modal) keep working.
+============================================================ */
+.mode-toggle {
+  height: 38px;
+  padding: 0 0.7rem;
+  font-family: 'Noto Serif JP', var(--font-display), serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--gold);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+}
+.mode-toggle:hover { border-color: var(--gold); }
+.mode-toggle[aria-pressed="true"] { background: var(--gold); color: var(--bg); border-color: var(--gold); }
+
+.film-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9500;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-backdrop-filter: grayscale(1) contrast(1.15);
+          backdrop-filter: grayscale(1) contrast(1.15);
+  transition: opacity 0.6s ease, visibility 0.6s;
+}
+html[data-mode="kurosawa"] .film-overlay { opacity: 1; visibility: visible; }
+
+/* Film grain */
+.film-overlay::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='.33 .33 .33 0 0 .33 .33 .33 0 0 .33 .33 .33 0 0 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: filmGrain 0.8s steps(6) infinite;
+}
+/* Vignette */
+.film-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 52%, rgba(0, 0, 0, 0.55) 100%);
+}
+@keyframes filmGrain {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-4%, 3%); }
+  40%  { transform: translate(3%, -5%); }
+  60%  { transform: translate(-6%, -2%); }
+  80%  { transform: translate(5%, 4%); }
+  100% { transform: translate(0, 0); }
+}
+
+@media (max-width: 380px) {
+  .nav-actions { gap: 0.5rem; }
+  .mode-toggle { padding: 0 0.55rem; }
 }

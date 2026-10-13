@@ -8,13 +8,16 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;700&family=Noto+Serif+JP:wght@600&text=%E5%A3%B1%E5%BC%90%E5%8F%82%E8%82%86%E9%BB%92%E6%BE%A4&display=swap" rel="stylesheet" />
 
-  <script>try{if(localStorage.getItem("theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
+  <script>try{var d=document.documentElement;if(localStorage.getItem("theme")==="light")d.setAttribute("data-theme","light");if(localStorage.getItem("kurosawa")==="on")d.setAttribute("data-mode","kurosawa")}catch(e){}</script>
   <link rel="icon" type="image/png" href="images/Logo.png" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+
+  <!-- Kurosawa mode film layer (grain + vignette) -->
+  <div class="film-overlay" aria-hidden="true"></div>
 
   <!-- Floating Sakura Petals Layer -->
   <div class="sakura-container" aria-hidden="true">
@@ -29,7 +32,7 @@
   </div>
 
 <!-- Ghost of Tsushima Loading Screen -->
-  <div id="skeleton-loader" aria-hidden="true">
+  <div id="pageLoader" aria-hidden="true">
     <!-- Background Watermark Text -->
     <div class="loader-jp-bg">対馬の幽霊</div>
 
@@ -69,7 +72,7 @@
   </div>
 
   <!-- Offline screen -->
-  <div id="offline-screen" role="alert">
+  <div id="offlineScreen" role="alert">
     <div class="offline-box">
       <h1 class="offline-title">Connection Lost</h1>
       <p class="offline-text">Check your internet connection, then reload the page.</p>
@@ -99,13 +102,11 @@
 
   <!-- NAV -->
   <header class="site-nav" id="siteNav">
-    <div class="container nav-inner">
-      <a class="brand" href="#hero" aria-label="Glee dot dev, back to top">
+    <div class="nav-shell">
+      <a class="brand" href="#hero" aria-label="Glee, back to top">
         <img src="images/Logo.png" alt="" width="28" height="28" class="brand-logo" />
         <span class="brand-text">&lt;/GLEE&gt;</span>
       </a>
-
-      <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">Menu</button>
 
       <nav aria-label="Main">
         <ul class="nav-menu" id="navMenu">
@@ -113,17 +114,22 @@
           <li><a class="nav-link" href="#about">About</a></li>
           <li><a class="nav-link" href="#skills">Skills</a></li>
           <li><a class="nav-link" href="#projects">Projects</a></li>
-          <li><a class="btn btn-crimson btn-sm" href="#contact">Contact</a></li>
-          <li>
-            <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-              <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-              <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-            </button>
-          </li>
+          <li class="nav-menu-contact"><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
       </nav>
+
+      <div class="nav-actions">
+        <button type="button" class="mode-toggle" id="kurosawaToggle" aria-pressed="false" aria-label="Kurosawa mode" title="Kurosawa mode">黒澤</button>
+        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <a class="btn btn-outline btn-sm nav-cta" href="#contact">Hire me</a>
+        <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">Menu</button>
+      </div>
+
+      <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
     </div>
-    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
   </header>
 
   <main>
@@ -245,15 +251,7 @@
           <p class="section-intro">Mastery over modern front-end design, responsive user interfaces, and the logic that underpins them.</p>
         </div>
 
-        <div class="filters" id="skillFilters" role="group" aria-label="Filter skills">
-          <button type="button" class="filter active" aria-pressed="true" onclick="filterSkills('all', this)">All</button>
-          <button type="button" class="filter" aria-pressed="false" onclick="filterSkills('frontend', this)">Frontend</button>
-          <button type="button" class="filter" aria-pressed="false" onclick="filterSkills('backend', this)">Backend</button>
-          <button type="button" class="filter" aria-pressed="false" onclick="filterSkills('database', this)">Database</button>
-          <button type="button" class="filter" aria-pressed="false" onclick="filterSkills('design', this)">Design &amp; Tools</button>
-        </div>
-
-        <div class="skills-grid" id="skillsContainer"></div>
+        <div class="arsenal" id="skillsContainer"></div>
 
         <div class="activity" id="activity">
           <div class="activity-head">
@@ -333,7 +331,7 @@
         </div>
 
         <div class="form-card">
-          <form id="spideyForm" action="https://api.web3forms.com/submit" method="POST" onsubmit="submitSpideyForm(event)">
+          <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" onsubmit="submitContactForm(event)">
             <!-- Replace with your Web3Forms Access Key -->
             <input type="hidden" name="access_key" value="ad25f2f1-9951-48b4-9021-97a56ff78e43">
 

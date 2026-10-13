@@ -2,7 +2,7 @@
    GHOST OF TSUSHIMA LOADING SCREEN
 ============================================================ */
 function initLoader() {
-  const loader = document.getElementById('skeleton-loader');
+  const loader = document.getElementById('pageLoader');
   const barFill = document.getElementById('loaderBarFill');
   const counter = document.getElementById('loaderCounter');
   const status = document.getElementById('loaderStatus');
@@ -86,6 +86,31 @@ function setupThemeToggle() {
       document.documentElement.setAttribute('data-theme', 'light');
       localStorage.setItem('theme', 'light');
     }
+  });
+}
+
+/* ============================================================
+   KUROSAWA MODE (black and white film look, works with light or dark)
+============================================================ */
+function setupKurosawaMode() {
+  const btn = document.getElementById('kurosawaToggle');
+  const root = document.documentElement;
+  if (!btn) return;
+
+  const sync = () => {
+    const on = root.getAttribute('data-mode') === 'kurosawa';
+    btn.setAttribute('aria-pressed', String(on));
+    return on;
+  };
+  sync();
+
+  btn.addEventListener('click', () => {
+    const turningOn = root.getAttribute('data-mode') !== 'kurosawa';
+    if (turningOn) root.setAttribute('data-mode', 'kurosawa');
+    else root.removeAttribute('data-mode');
+    try { localStorage.setItem('kurosawa', turningOn ? 'on' : 'off'); } catch (e) {}
+    sync();
+    showPopup(turningOn ? 'Kurosawa mode on' : 'Kurosawa mode off');
   });
 }
 
@@ -249,13 +274,6 @@ function setupRevealSlider() {
 /* ============================================================
    SKILLS
 ============================================================ */
-const SKILL_CATEGORIES = {
-  frontend: 'Frontend',
-  backend: 'Backend',
-  database: 'Database',
-  design: 'Design & Tools'
-};
-
 const DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons';
 const PROTOTYPE_SVG = '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="8" width="36" height="28" rx="3"/><path d="M6 16h36"/><path d="M25 24l13 5-6 2.5-2.5 6z"/></svg>';
 
@@ -273,37 +291,46 @@ const SKILLS = [
   { name: 'GitHub',      cat: 'design',   icon: 'github/github-original.svg', invert: true }
 ];
 
-function renderSkills(filter = 'all') {
-  const container = document.getElementById('skillsContainer');
-  if (!container) return;
-  container.innerHTML = '';
+const SKILL_GROUPS = [
+  { key: 'frontend', label: 'Frontend',       jp: '壱' },
+  { key: 'backend',  label: 'Backend',        jp: '弐' },
+  { key: 'database', label: 'Database',       jp: '参' },
+  { key: 'design',   label: 'Design & Tools', jp: '肆' }
+];
 
-  SKILLS.filter((s) => filter === 'all' || s.cat === filter).forEach((skill) => {
-    const tile = document.createElement('article');
-    tile.className = 'skill-tile';
-    tile.title = SKILL_CATEGORIES[skill.cat];
+function skillChip(skill) {
+  const icon = skill.svg
+    ? skill.svg
+    : `<img src="${DEVICON}/${skill.icon}" alt="" width="28" height="28" data-letter="${skill.name[0]}">`;
+  return `<li class="skill-chip"><span class="skill-icon${skill.invert ? ' invert' : ''}">${icon}</span><span class="skill-name">${skill.name}</span></li>`;
+}
 
-    const fallback = `<span class="skill-mono">${skill.name[0]}</span>`;
-    const icon = skill.svg
-      ? skill.svg
-      : `<img src="${DEVICON}/${skill.icon}" alt="" width="48" height="48" loading="lazy" onerror="this.outerHTML='${fallback}'">`;
-
-    tile.innerHTML = `
-      <span class="skill-icon${skill.invert ? ' invert' : ''}">${icon}</span>
-      <h3 class="skill-name">${skill.name}</h3>
-    `;
-    container.appendChild(tile);
+/* If an icon fails to load, swap it for the skill's first letter */
+function attachIconFallbacks(root) {
+  root.querySelectorAll('.skill-icon img').forEach((img) => {
+    const swap = () => {
+      const mono = document.createElement('span');
+      mono.className = 'skill-mono';
+      mono.textContent = img.dataset.letter || '';
+      img.replaceWith(mono);
+    };
+    img.addEventListener('error', swap, { once: true });
+    if (img.complete && img.naturalWidth === 0) swap();
   });
 }
 
-function filterSkills(cat, btnElement) {
-  btnElement.parentElement.querySelectorAll('.filter').forEach((b) => {
-    b.classList.remove('active');
-    b.setAttribute('aria-pressed', 'false');
-  });
-  btnElement.classList.add('active');
-  btnElement.setAttribute('aria-pressed', 'true');
-  renderSkills(cat);
+function renderSkills() {
+  const container = document.getElementById('skillsContainer');
+  if (!container) return;
+  container.innerHTML = SKILL_GROUPS.map((group) => `
+    <div class="arsenal-row">
+      <div class="arsenal-label">
+        <span class="arsenal-jp" aria-hidden="true">${group.jp}</span>
+        <h3>${group.label}</h3>
+      </div>
+      <ul class="arsenal-items">${SKILLS.filter((s) => s.cat === group.key).map(skillChip).join('')}</ul>
+    </div>`).join('');
+  attachIconFallbacks(container);
 }
 
 /* ============================================================
@@ -554,7 +581,7 @@ function setupModal() {
 /* ============================================================
    CONTACT FORM + TOAST
 ============================================================ */
-async function submitSpideyForm(event) {
+async function submitContactForm(event) {
   event.preventDefault();
   const form = event.target;
   const btn = document.getElementById('submitBtn');
@@ -606,7 +633,7 @@ function showPopup(text) {
    NETWORK DETECTION
 ============================================================ */
 function handleNetworkChange() {
-  const screen = document.getElementById('offline-screen');
+  const screen = document.getElementById('offlineScreen');
   if (!screen) return;
   screen.style.display = navigator.onLine ? 'none' : 'flex';
 }
@@ -618,13 +645,14 @@ window.addEventListener('offline', handleNetworkChange);
 ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
   setupThemeToggle();
+  setupKurosawaMode();
   setupNav();
   setupScrollSpy();
   setupScrollTop();
   setupTypewriter();
   setupModal();
   setupRevealSlider();
-  renderSkills('all');
+  renderSkills();
   loadActivity();
   renderProjects('all');
   handleNetworkChange();
