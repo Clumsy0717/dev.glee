@@ -13,6 +13,7 @@
   <script>try{var d=document.documentElement;if(localStorage.getItem("theme")==="light")d.setAttribute("data-theme","light");if(localStorage.getItem("kurosawa")==="on")d.setAttribute("data-mode","kurosawa")}catch(e){}</script>
   <link rel="icon" type="image/png" href="images/Logo.png" />
   <link rel="stylesheet" href="css/style.css" />
+  <noscript><style>#pageLoader{display:none!important}</style></noscript>
 </head>
 <body>
 
@@ -30,41 +31,37 @@
     <div class="petal"></div>
   </div>
 
-  <!-- Standard Clean Loading Screen -->
+  <!-- Loading screen (Ghost of Tsushima style) -->
   <div id="pageLoader" aria-hidden="true">
-    <!-- Background Watermark Text -->
-    <div class="loader-jp-bg">対馬の幽霊</div>
+    <div class="loader-half loader-half-a"></div>
+    <div class="loader-half loader-half-b"></div>
 
-    <div class="loader-content">
-      <!-- Katana Sword Emblem -->
-      <div class="loader-katana-wrap">
-        <svg class="loader-katana-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M50 15 C30 15 18 30 18 50 C18 70 30 85 50 85 C70 85 82 70 82 50 C82 30 70 15 50 15 Z" stroke="rgba(229, 193, 88, 0.2)" stroke-width="2" />
-          <path d="M25 75 L75 25 M75 25 L70 23 M75 25 L77 30" stroke="var(--gold, #e5c158)" stroke-width="3" stroke-linecap="round" />
-          <path d="M25 25 L75 75 M25 25 L30 23 M25 25 L23 30" stroke="var(--crimson, #c92a2a)" stroke-width="3" stroke-linecap="round" />
+    <svg class="loader-slash" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <line x1="0" y1="38" x2="100" y2="62" vector-effect="non-scaling-stroke"/>
+    </svg>
+
+    <div class="loader-stage">
+      <img class="loader-logo" src="images/Logo.png" alt="" width="132" height="132" />
+
+      <div class="loader-divider">
+        <span class="divider-line"></span>
+        <span class="divider-gem"></span>
+        <h2 class="loader-title">Glee Portfolio</h2>
+        <span class="divider-gem"></span>
+        <span class="divider-line"></span>
+      </div>
+
+      <div class="loader-ring">
+        <svg viewBox="0 0 48 48">
+          <circle class="ring-track" cx="24" cy="24" r="21"/>
+          <circle class="ring-fill" id="loaderRing" cx="24" cy="24" r="21"/>
         </svg>
-      </div>
-
-      <!-- Title & Subtitle -->
-      <h2 class="loader-title">&lt;/GLEE&gt;</h2>
-      <p class="loader-subtitle">WEB DEVELOPER &amp; UI ARCHITECT</p>
-
-      <!-- Sword Blade Loading Bar -->
-      <div class="katana-bar-wrapper">
-        <div class="katana-hilt">
-          <span class="hilt-guard"></span>
-        </div>
-        <div class="katana-blade-track">
-          <div class="katana-blade-fill" id="loaderBarFill"></div>
-        </div>
-        <div class="katana-tip"></div>
-      </div>
-
-      <!-- Status & Percentage Counter -->
-      <div class="loader-meta">
-        <span class="loader-status" id="loaderStatus">&gt; UNSHEATHING_BLADE</span>
         <span class="loader-counter" id="loaderCounter">0%</span>
       </div>
+
+      <p class="loader-label">Loading</p>
+      <p class="loader-status" id="loaderStatus">Preparing the scene</p>
+      <p class="loader-note">Good things take a moment. Thank you for waiting.</p>
     </div>
   </div>
 

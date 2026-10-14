@@ -1,9 +1,9 @@
 /* ============================================================
-   STANDARD CLEAN LOADING SCREEN (NO SLICE EFFECT)
+   LOADING SCREEN: ring progress, then a katana slash opens the page
 ============================================================ */
 function initLoader() {
   const loader = document.getElementById('pageLoader');
-  const barFill = document.getElementById('loaderBarFill');
+  const ring = document.getElementById('loaderRing');
   const counter = document.getElementById('loaderCounter');
   const status = document.getElementById('loaderStatus');
 
@@ -11,59 +11,91 @@ function initLoader() {
     document.body.classList.add('ready');
     return;
   }
-
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     loader.remove();
     document.body.classList.add('ready');
     return;
   }
 
-  const logs = [
-    '> UNSHEATHING_BLADE',
-    '> HONING_PRECISION',
-    '> FORGING_INTERFACE',
-    '> AWAKENING_SPIRIT',
-    '> READY_FOR_HONOR'
+  document.body.classList.add('is-loading');
+
+  const CIRCUMFERENCE = 2 * Math.PI * 21;
+  const MIN_MS = 2400;
+  const STATUSES = [
+    [0, 'Preparing the scene'],
+    [30, 'Gathering assets'],
+    [60, 'Sharpening the blade'],
+    [90, 'Almost ready']
   ];
-
+  const startedAt = performance.now();
+  let pageLoaded = document.readyState === 'complete';
   let progress = 0;
+  if (!pageLoaded) window.addEventListener('load', () => { pageLoaded = true; }, { once: true });
 
-  const interval = setInterval(() => {
-    progress += Math.floor(Math.random() * 20) + 1;
-
-    if (progress > 100) progress = 100;
-
-    if (barFill) barFill.style.width = `${progress}%`;
-    if (counter) counter.textContent = `${progress}%`;
-
+  function render(value) {
+    if (ring) ring.style.strokeDashoffset = String(CIRCUMFERENCE * (1 - value / 100));
+    if (counter) counter.textContent = `${value}%`;
     if (status) {
-      if (progress < 25) status.textContent = logs[0];
-      else if (progress < 50) status.textContent = logs[1];
-      else if (progress < 75) status.textContent = logs[2];
-      else if (progress < 95) status.textContent = logs[3];
-      else status.textContent = logs[4];
+      const current = STATUSES.filter(([min]) => value >= min).pop();
+      if (current && status.textContent !== current[1]) status.textContent = current[1];
     }
+  }
 
-    if (progress >= 100) {
-      clearInterval(interval);
-      
-      // Clean fade out when complete
-      setTimeout(() => {
-        loader.classList.add('hide');
-        document.body.classList.add('ready');
-        
-        setTimeout(() => {
-          loader.remove();
-        }, 500);
-      }, 300);
-    }
-  }, 110);
+  function finish() {
+    render(100);
+    setTimeout(() => loader.classList.add('is-done'), 250);       // content fades
+    setTimeout(() => loader.classList.add('is-slashing'), 650);   // slash is drawn
+    setTimeout(() => {                                            // page splits open
+      loader.classList.add('is-open');
+      document.body.classList.add('ready');
+      document.body.classList.remove('is-loading');
+    }, 1000);
+    setTimeout(() => loader.remove(), 2100);
+  }
+
+  function tick(now) {
+    const t = Math.min((now - startedAt) / MIN_MS, 1);
+    let target = (1 - Math.pow(1 - t, 2.2)) * 100;
+    if (!pageLoaded) target = Math.min(target, 92);       // wait for the real load event
+    progress += Math.max(0, target - progress) * 0.14;
+    if (target >= 100 && progress > 99.4) progress = 100;
+    render(Math.floor(progress));
+    if (progress >= 100) { finish(); return; }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
 }
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initLoader);
 } else {
   initLoader();
+}
+
+/* ============================================================
+   SCROLL REVEAL: sections ease in as they come into view
+============================================================ */
+function setupScrollReveal() {
+  if (!('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const targets = document.querySelectorAll(
+    '.section-head, .section > .container > .section-title, .about-grid > *, .arsenal, ' +
+    '.filters, .projects-grid, .activity, .contact-grid > *'
+  );
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
+
+  targets.forEach((el) => {
+    el.classList.add('js-reveal');
+    observer.observe(el);
+  });
 }
 
 /* ============================================================
@@ -650,6 +682,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupModal();
   setupRevealSlider();
   renderSkills();
+  setupScrollReveal();
   loadActivity();
   renderProjects('all');
   handleNetworkChange();
