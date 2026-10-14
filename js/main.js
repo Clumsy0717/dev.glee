@@ -140,7 +140,7 @@ const CERTIFICATES_DATA = [
     issuer: 'Cisco Networking Academy Program',
     date: 'October 2024',
     image: 'images/certificates/Intro_Cybersecurity.png',
-    link: 'files/Intro_to_Cybersecurity.pdf'
+    link: 'files/Intro_Cybersecurity.pdf'
   },
   {
     title: 'NC2 in Computer System Servicing',
