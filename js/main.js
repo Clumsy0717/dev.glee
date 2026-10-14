@@ -73,6 +73,227 @@ if (document.readyState === 'loading') {
 }
 
 /* ============================================================
+   EXPERIENCE, EDUCATION AND CERTIFICATES
+   Edit the three lists below. Remove any sample entry you do not need.
+============================================================ */
+const EXPERIENCE_DATA = [
+  {
+    role: 'Your Role Title',                 // EDIT: e.g. Web Developer Intern
+    org: 'Company or Organization',          // EDIT
+    location: 'City, Philippines',           // EDIT (optional)
+    period: 'Month Year - Present',          // EDIT
+    type: 'Internship',                      // EDIT: Internship, Freelance, Part-time, Volunteer...
+    points: [
+      'Describe one thing you built or improved, and the result it had.',
+      'Mention the tools you used and how you worked with the team.'
+    ],
+    tags: ['HTML5', 'CSS3', 'JavaScript']
+  },
+  {
+    role: 'Another Role or Project',
+    org: 'Organization or Client',
+    location: '',
+    period: 'Month Year - Month Year',
+    type: 'Freelance',
+    points: ['A short, specific achievement. Numbers help, for example "cut load time by 40%".'],
+    tags: ['PHP', 'MySQL']
+  }
+];
+
+const EDUCATION_DATA = [
+  {
+    degree: 'Bachelor of Science in Information Technology',
+    school: 'Your University Name',          // EDIT
+    location: 'City, Philippines',           // EDIT (optional)
+    years: 'Year - Present',                 // EDIT
+    note: 'Add honors, your thesis topic, or what you focus on in your studies.', // EDIT
+    tags: ['Web Development', 'Databases', 'UI Design']
+  },
+  {
+    degree: 'Senior High School',
+    school: 'Your School Name',              // EDIT
+    location: '',
+    years: 'Year - Year',                    // EDIT
+    note: 'Track or strand, and any awards.',// EDIT
+    tags: []
+  }
+];
+
+const CERTIFICATES_DATA = [
+  {
+    title: 'Certificate Title',              // EDIT
+    issuer: 'Issuing Organization',          // EDIT
+    date: 'Month Year',                      // EDIT
+    image: 'images/certificates/certificate-1.jpg', // put your certificate picture here
+    link: ''                                 // optional: credential or verification URL
+  },
+  {
+    title: 'Another Certificate',
+    issuer: 'Issuing Organization',
+    date: 'Month Year',
+    image: 'images/certificates/certificate-2.jpg',
+    link: ''
+  },
+  {
+    title: 'Third Certificate',
+    issuer: 'Issuing Organization',
+    date: 'Month Year',
+    image: 'images/certificates/certificate-3.jpg',
+    link: ''
+  }
+];
+
+function esc(value) {
+  return String(value).replace(/[&<>"']/g, (ch) => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]
+  ));
+}
+
+function renderExperience() {
+  const list = document.getElementById('experienceContainer');
+  if (!list) return;
+  if (!EXPERIENCE_DATA.length) {
+    list.innerHTML = '<li class="empty-note">Experience coming soon.</li>';
+    return;
+  }
+  list.innerHTML = EXPERIENCE_DATA.map((item) => `
+    <li class="timeline-item">
+      <div class="timeline-meta">
+        <span class="timeline-period">${esc(item.period)}</span>
+        ${item.type ? `<span class="timeline-type">${esc(item.type)}</span>` : ''}
+      </div>
+      <div class="timeline-card">
+        <h3 class="timeline-role">${esc(item.role)}</h3>
+        <p class="timeline-org">${esc(item.org)}${item.location ? `, ${esc(item.location)}` : ''}</p>
+        ${item.points && item.points.length ? `<ul class="timeline-points">${item.points.map((p) => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}
+        ${item.tags && item.tags.length ? `<ul class="tag-list">${tagsMarkup(item.tags.map(esc))}</ul>` : ''}
+      </div>
+    </li>`).join('');
+}
+
+function renderEducation() {
+  const grid = document.getElementById('educationContainer');
+  if (!grid) return;
+  if (!EDUCATION_DATA.length) {
+    grid.innerHTML = '<p class="empty-note">Education coming soon.</p>';
+    return;
+  }
+  grid.innerHTML = EDUCATION_DATA.map((edu) => `
+    <article class="edu-card">
+      <span class="edu-watermark" aria-hidden="true">学</span>
+      <p class="edu-years">${esc(edu.years)}</p>
+      <h3 class="edu-degree">${esc(edu.degree)}</h3>
+      <p class="edu-school">${esc(edu.school)}${edu.location ? `, ${esc(edu.location)}` : ''}</p>
+      ${edu.note ? `<p class="edu-note">${esc(edu.note)}</p>` : ''}
+      ${edu.tags && edu.tags.length ? `<ul class="tag-list">${tagsMarkup(edu.tags.map(esc))}</ul>` : ''}
+    </article>`).join('');
+}
+
+/* Certificate picture with a placeholder if the image file is missing */
+function certPreview(cert) {
+  const img = cert.image
+    ? `<img src="${esc(cert.image)}" alt="Certificate: ${esc(cert.title)}" loading="lazy" onerror="this.remove()">`
+    : '';
+  return `<span class="preview-fallback">Certificate preview</span>${img}`;
+}
+
+function renderCertificates() {
+  const grid = document.getElementById('certificatesContainer');
+  if (!grid) return;
+  if (!CERTIFICATES_DATA.length) {
+    grid.innerHTML = '<p class="empty-note">Certificates coming soon.</p>';
+    return;
+  }
+  grid.innerHTML = CERTIFICATES_DATA.map((cert, i) => `
+    <article class="cert-card">
+      <button type="button" class="project-preview cert-preview" onclick="openCertModal(${i})" aria-label="View certificate: ${esc(cert.title)}">${certPreview(cert)}</button>
+      <div class="cert-body">
+        <h3 class="cert-title">${esc(cert.title)}</h3>
+        <p class="cert-meta">${esc(cert.issuer)}${cert.date ? `, ${esc(cert.date)}` : ''}</p>
+        <div class="project-actions">
+          <button type="button" class="btn btn-gold btn-sm" onclick="openCertModal(${i})">View certificate</button>
+          ${cert.link ? `<a class="btn btn-ghost btn-sm" href="${esc(cert.link)}" target="_blank" rel="noopener">Verify</a>` : ''}
+        </div>
+      </div>
+    </article>`).join('');
+}
+
+let certLastFocus = null;
+
+function openCertModal(index) {
+  const cert = CERTIFICATES_DATA[index];
+  if (!cert) return;
+  certLastFocus = document.activeElement;
+
+  document.getElementById('certModalMedia').innerHTML = certPreview(cert);
+  document.getElementById('certModalTitle').textContent = cert.title;
+  document.getElementById('certModalMeta').textContent = cert.issuer + (cert.date ? `, ${cert.date}` : '');
+
+  const actions = document.getElementById('certModalActions');
+  actions.innerHTML = cert.link
+    ? `<a class="btn btn-gold btn-sm" href="${esc(cert.link)}" target="_blank" rel="noopener">Verify credential</a>`
+    : '';
+  const close = document.createElement('button');
+  close.type = 'button';
+  close.className = 'btn btn-outline btn-sm';
+  close.textContent = 'Close';
+  close.addEventListener('click', closeCertModal);
+  actions.appendChild(close);
+
+  document.getElementById('certModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  close.focus();
+}
+
+function closeCertModal() {
+  document.getElementById('certModal').classList.remove('active');
+  document.body.style.overflow = '';
+  if (certLastFocus) certLastFocus.focus();
+}
+
+function setupCertModal() {
+  const overlay = document.getElementById('certModal');
+  if (!overlay) return;
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeCertModal(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('active')) closeCertModal();
+  });
+}
+
+/* ============================================================
+   ABOUT TABS: experience, education, certifications
+============================================================ */
+function setupAboutTabs() {
+  const tabs = Array.from(document.querySelectorAll('.about-tab'));
+  if (!tabs.length) return;
+  const panels = tabs.map((t) => document.getElementById(t.getAttribute('aria-controls')));
+
+  function select(index, focus) {
+    tabs.forEach((tab, i) => {
+      const on = i === index;
+      tab.classList.toggle('active', on);
+      tab.setAttribute('aria-selected', String(on));
+      tab.tabIndex = on ? 0 : -1;
+      if (panels[i]) panels[i].hidden = !on;
+    });
+    if (focus) tabs[index].focus();
+  }
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => select(i));
+    tab.addEventListener('keydown', (e) => {
+      let next = null;
+      if (e.key === 'ArrowRight') next = (i + 1) % tabs.length;
+      else if (e.key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === 'Home') next = 0;
+      else if (e.key === 'End') next = tabs.length - 1;
+      if (next !== null) { e.preventDefault(); select(next, true); }
+    });
+  });
+  select(0);
+}
+
+/* ============================================================
    SCROLL REVEAL: sections ease in as they come into view
 ============================================================ */
 function setupScrollReveal() {
@@ -81,7 +302,7 @@ function setupScrollReveal() {
 
   const targets = document.querySelectorAll(
     '.section-head, .section > .container > .section-title, .about-grid > *, .arsenal, ' +
-    '.filters, .projects-grid, .activity, .contact-grid > *'
+    '.filters, .projects-grid, .activity, .contact-grid > *, .timeline, .edu-grid, .cert-grid'
   );
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -196,8 +417,12 @@ function scrollToTop() {
 function setupScrollSpy() {
   const nav = document.getElementById('siteNav');
   const bar = document.getElementById('scrollProgress');
-  const links = Array.from(document.querySelectorAll('.nav-menu a[href^="#"]'));
-  const sections = links.map((a) => document.querySelector(a.getAttribute('href')));
+  const links = Array.from(document.querySelectorAll('.nav-menu a[href^="#"]')).map((a) => ({
+    el: a,
+    ids: [a.getAttribute('href').slice(1)].concat(a.dataset.also ? a.dataset.also.split(' ') : [])
+  }));
+  const ids = Array.from(new Set(links.flatMap((l) => l.ids)));
+  const sections = ids.map((id) => document.getElementById(id)).filter(Boolean);
   let ticking = false;
 
   function update() {
@@ -207,12 +432,14 @@ function setupScrollSpy() {
     if (nav) nav.classList.toggle('scrolled', y > 8);
     if (bar) bar.style.setProperty('--progress', max > 0 ? Math.min(y / max, 1) : 0);
 
-    let current = 0;
-    sections.forEach((s, i) => { if (s && s.offsetTop <= y + 160) current = i; });
-    if (max > 0 && y >= max - 4) current = sections.length - 1;
-    links.forEach((a, i) => {
-      a.classList.toggle('active', i === current);
-      if (i === current) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+    let currentId = sections.length ? sections[0].id : '';
+    sections.forEach((s) => { if (s.offsetTop <= y + 160) currentId = s.id; });
+    if (max > 0 && y >= max - 4 && sections.length) currentId = sections[sections.length - 1].id;
+
+    links.forEach((l) => {
+      const on = l.ids.includes(currentId);
+      l.el.classList.toggle('active', on);
+      if (on) l.el.setAttribute('aria-current', 'true'); else l.el.removeAttribute('aria-current');
     });
   }
   window.addEventListener('scroll', () => {
@@ -682,6 +909,11 @@ document.addEventListener('DOMContentLoaded', () => {
   setupModal();
   setupRevealSlider();
   renderSkills();
+  renderExperience();
+  renderEducation();
+  renderCertificates();
+  setupCertModal();
+  setupAboutTabs();
   setupScrollReveal();
   loadActivity();
   renderProjects('all');

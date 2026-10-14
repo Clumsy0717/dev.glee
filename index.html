@@ -8,7 +8,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;700&family=Noto+Serif+JP:wght@600&text=%E5%A3%B1%E5%BC%90%E5%8F%82%E8%82%86%E9%BB%92%E6%BE%A4&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;700&family=Noto+Serif+JP:wght@600&text=%E5%A3%B1%E5%BC%90%E5%8F%82%E8%82%86%E9%BB%92%E6%BE%A4%E5%AD%A6&display=swap" rel="stylesheet" />
 
   <script>try{var d=document.documentElement;if(localStorage.getItem("theme")==="light")d.setAttribute("data-theme","light");if(localStorage.getItem("kurosawa")==="on")d.setAttribute("data-mode","kurosawa")}catch(e){}</script>
   <link rel="icon" type="image/png" href="images/Logo.png" />
@@ -62,6 +62,16 @@
       <p class="loader-label">Loading</p>
       <p class="loader-status" id="loaderStatus">Preparing the scene</p>
       <p class="loader-note">Good things take a moment. Thank you for waiting.</p>
+    </div>
+  </div>
+
+  <!-- Certificate viewer -->
+  <div class="modal-overlay" id="certModal" role="dialog" aria-modal="true" aria-labelledby="certModalTitle">
+    <div class="modal-card cert-modal-card">
+      <div class="project-preview cert-modal-media" id="certModalMedia"></div>
+      <h3 id="certModalTitle" class="modal-title">Certificate</h3>
+      <p id="certModalMeta" class="modal-desc"></p>
+      <div class="modal-actions" id="certModalActions"></div>
     </div>
   </div>
 
@@ -235,6 +245,32 @@
           </div>
         </div>
 
+      </div>
+
+      <div class="container about-more">
+        <div class="journey-head">
+          <h3 class="journey-title">My Journey</h3>
+          <p class="journey-intro">Where I have worked, studied and earned credentials.</p>
+        </div>
+
+        <div class="about-tabs" role="tablist" aria-label="Experience, education and certifications">
+          <button type="button" class="about-tab active" role="tab" id="tab-experience" aria-controls="panel-experience" aria-selected="true">Experience</button>
+          <button type="button" class="about-tab" role="tab" id="tab-education" aria-controls="panel-education" aria-selected="false" tabindex="-1">Education</button>
+          <button type="button" class="about-tab" role="tab" id="tab-certifications" aria-controls="panel-certifications" aria-selected="false" tabindex="-1">Certifications</button>
+        </div>
+
+        <div class="about-panel" id="panel-experience" role="tabpanel" aria-labelledby="tab-experience">
+          <ol class="timeline" id="experienceContainer"></ol>
+        </div>
+
+        <div class="about-panel" id="panel-education" role="tabpanel" aria-labelledby="tab-education" hidden>
+          <div class="edu-grid" id="educationContainer"></div>
+        </div>
+
+        <div class="about-panel" id="panel-certifications" role="tabpanel" aria-labelledby="tab-certifications" hidden>
+          <p class="panel-note">Click a certificate to view it in full.</p>
+          <div class="cert-grid" id="certificatesContainer"></div>
+        </div>
       </div>
     </section>
 
