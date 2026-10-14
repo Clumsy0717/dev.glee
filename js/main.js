@@ -332,23 +332,18 @@ function setupScrollReveal() {
 ============================================================ */
 function setupThemeToggle() {
   const toggle = document.getElementById('themeToggle');
-  const savedTheme = localStorage.getItem('theme');
+  const root = document.documentElement;
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
 
-  if (savedTheme === 'light') {
-    document.documentElement.setAttribute('data-theme', 'light');
-  }
-
+  // The portfolio always opens in light mode; the toggle only changes the current visit.
+  root.setAttribute('data-theme', 'light');
   if (!toggle) return;
 
   toggle.addEventListener('click', () => {
-    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-    if (isLight) {
-      document.documentElement.removeAttribute('data-theme');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'light');
-      localStorage.setItem('theme', 'light');
-    }
+    const isLight = root.getAttribute('data-theme') === 'light';
+    if (isLight) root.removeAttribute('data-theme');
+    else root.setAttribute('data-theme', 'light');
+    if (metaTheme) metaTheme.setAttribute('content', isLight ? '#111216' : '#f4f1ea');
   });
 }
 
@@ -371,7 +366,6 @@ function setupKurosawaMode() {
     const turningOn = root.getAttribute('data-mode') !== 'kurosawa';
     if (turningOn) root.setAttribute('data-mode', 'kurosawa');
     else root.removeAttribute('data-mode');
-    try { localStorage.setItem('kurosawa', turningOn ? 'on' : 'off'); } catch (e) {}
     sync();
     showPopup(turningOn ? 'Kurosawa mode on' : 'Kurosawa mode off');
   });
