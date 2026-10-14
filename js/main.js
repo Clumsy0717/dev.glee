@@ -78,67 +78,75 @@ if (document.readyState === 'loading') {
 ============================================================ */
 const EXPERIENCE_DATA = [
   {
-    role: 'Your Role Title',                 // EDIT: e.g. Web Developer Intern
-    org: 'Company or Organization',          // EDIT
-    location: 'City, Philippines',           // EDIT (optional)
-    period: 'Month Year - Present',          // EDIT
-    type: 'Internship',                      // EDIT: Internship, Freelance, Part-time, Volunteer...
+    role: 'Encoder',                 // EDIT: e.g. Web Developer Intern
+    org: 'Company',          // EDIT
+    location: 'Villasis, Pangasinan',           // EDIT (optional)
+    period: 'March 2024 - Present',          // EDIT
+    type: 'Volunteer',                      // EDIT: Internship, Freelance, Part-time, Volunteer...
     points: [
-      'Describe one thing you built or improved, and the result it had.',
-      'Mention the tools you used and how you worked with the team.'
+      'I encode the papers and find receipt, and I hand write the other receipts',
+      'Excel and Google Sheets are used to encode the data',
     ],
-    tags: ['HTML5', 'CSS3', 'JavaScript']
+    tags: ['Excel', 'Google Sheets']
   },
   {
-    role: 'Another Role or Project',
-    org: 'Organization or Client',
-    location: '',
-    period: 'Month Year - Month Year',
-    type: 'Freelance',
-    points: ['A short, specific achievement. Numbers help, for example "cut load time by 40%".'],
-    tags: ['PHP', 'MySQL']
+    role: 'Marketing Staff',                
+    org: 'Organization',
+    location: 'Villasis, Pangasinan',
+    period: 'July 2024 - January 2025',
+    type: 'Part-time',
+    points: ['Advertising School promos and events', 'I use social media to promote the school', 'Handing out flyers and posters to promote the school'],
+    tags: ['Flyers', 'Posters', 'Social Media']
   }
 ];
 
 const EDUCATION_DATA = [
   {
     degree: 'Bachelor of Science in Information Technology',
-    school: 'Your University Name',          // EDIT
-    location: 'City, Philippines',           // EDIT (optional)
-    years: 'Year - Present',                 // EDIT
-    note: 'Add honors, your thesis topic, or what you focus on in your studies.', // EDIT
+    school: 'University Of Eastern Pangasinan',          // EDIT
+    location: 'Binalonan, Pangasinan',           // EDIT (optional)
+    years: '2025 - Present',                 // EDIT
+    note: 'Web Development', // EDIT
+    tags: ['Web Development', 'Databases', 'UI Design']
+  },
+  {
+    degree: 'Bachelor of Science in Information Technology',
+    school: 'Panpacific University',          // EDIT
+    location: 'Urdaneta, Pangasinan',           // EDIT (optional)
+    years: '2024 - 2025',                 // EDIT
+    note: 'Web Development', // EDIT
     tags: ['Web Development', 'Databases', 'UI Design']
   },
   {
     degree: 'Senior High School',
     school: 'Your School Name',              // EDIT
-    location: '',
-    years: 'Year - Year',                    // EDIT
-    note: 'Track or strand, and any awards.',// EDIT
+    location: 'Villasis, Pangasinan',
+    years: '2022 - 2024',                    // EDIT
+    note: 'TVL - CSS, TESDA NCII CSS Passer, Grade 12 S.Y 2023 - 2024 With Honors, Grade 12 S.Y 2023 - 2024 Intramurals Third Place in Chess, Grade 11 S.Y 2022 - 2023 With Honors',// EDIT
     tags: []
   }
 ];
 
 const CERTIFICATES_DATA = [
   {
-    title: 'Certificate Title',              // EDIT
-    issuer: 'Issuing Organization',          // EDIT
-    date: 'Month Year',                      // EDIT
-    image: 'images/certificates/certificate-1.jpg', // put your certificate picture here
-    link: ''                                 // optional: credential or verification URL
+    title: 'Python Essentials 1',              // EDIT
+    issuer: 'Cisco Networking Academy Program',          // EDIT
+    date: 'November 2024',                      // EDIT
+    image: 'images/certificates/pythonessentials1.png', // put your certificate picture here
+    link: 'files/Python_Essentials_1.pdf'                                 // optional: credential or verification URL
   },
   {
     title: 'Another Certificate',
-    issuer: 'Issuing Organization',
-    date: 'Month Year',
-    image: 'images/certificates/certificate-2.jpg',
-    link: ''
+    issuer: 'Cisco Networking Academy Program',
+    date: 'October 2024',
+    image: 'images/certificates/Intro_Cybersecurity.png',
+    link: 'files/Intro_to_Cybersecurity.pdf'
   },
   {
-    title: 'Third Certificate',
-    issuer: 'Issuing Organization',
-    date: 'Month Year',
-    image: 'images/certificates/certificate-3.jpg',
+    title: 'NC2 in Computer System Servicing',
+    issuer: 'TESDA',
+    date: 'May 2024',
+    image: 'images/certificates/NC2.png',
     link: ''
   }
 ];
@@ -693,23 +701,23 @@ async function loadActivity() {
 const PROJECTS_DATA = [
   {
     id: 'p1',
-    title: 'Hotel Management System',
-    desc: 'Full-featured booking & room reservation system engineered using structured backend logic.',
-    type: 'dev',
-    status: 'In development',
-    dot: 'orange',
-    tags: ['Backend', 'Console App'],
-    image: 'images/projects/hotel-management.jpg',
-    link: '#'
+    title: 'Read me when you need me',
+    desc: 'A little book of love, comfort, and reminders',
+    type: 'live',
+    status: 'Live',
+    dot: 'green',
+    tags: ['Html', 'Css', 'JavaScript'],
+    image: 'images/projects/ReadMeWhenYouNeedMe.png',
+    link: 'https://read-me-when-you-need-me-z1a2.vercel.app/'
   },
   {
     id: 'p2',
-    title: 'Grocery Inventory App',
-    desc: 'Desktop application built for managing stock levels, inventory records, and exporting CSV reports.',
+    title: 'Arca',
+    desc: 'A sari-sari store management system that allows store owners to keep track of their inventory, sales, and expenses.',
     type: 'dev',
     status: 'In development',
     dot: 'orange',
-    tags: ['Python', 'Tkinter', 'CSV'],
+    tags: ['PHP', 'SQL', 'HTML', 'CSS', 'JavaScript'],
     image: 'images/projects/grocery-inventory.jpg',
     link: '#'
   },
@@ -721,8 +729,8 @@ const PROJECTS_DATA = [
     status: 'Live',
     dot: 'green',
     tags: ['HTML5', 'CSS3', 'JavaScript'],
-    image: 'images/projects/portfolio.jpg',
-    link: 'https://github.com/Clumsy0717'
+    image: 'images/projects/Portfolio.png',
+    link: 'https://devglee.vercel.app/'
   }
 ];
 
