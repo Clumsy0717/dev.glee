@@ -119,7 +119,7 @@ const EDUCATION_DATA = [
   },
   {
     degree: 'Senior High School',
-    school: 'Your School Name',              // EDIT
+    school: 'Don Ramon E Costales Memorial Nation Highschool',              // EDIT
     location: 'Villasis, Pangasinan',
     years: '2022 - 2024',                    // EDIT
     note: 'TVL - CSS, TESDA NCII CSS Passer, Grade 12 S.Y 2023 - 2024 With Honors, Grade 12 S.Y 2023 - 2024 Intramurals Third Place in Chess, Grade 11 S.Y 2022 - 2023 With Honors',// EDIT
