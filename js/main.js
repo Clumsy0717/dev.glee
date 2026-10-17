@@ -136,7 +136,7 @@ const CERTIFICATES_DATA = [
     link: 'files/Python_Essentials_1.pdf'                                 // optional: credential or verification URL
   },
   {
-    title: 'Another Certificate',
+    title: 'Intro to Cybersecurity',
     issuer: 'Cisco Networking Academy Program',
     date: 'October 2024',
     image: 'images/certificates/Intro_Cybersecurity.png',
