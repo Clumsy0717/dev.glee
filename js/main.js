@@ -695,6 +695,17 @@ async function loadActivity() {
 const PROJECTS_DATA = [
   {
     id: 'p1',
+    title: 'Glee Portfolio Website',
+    desc: 'Interactive modern portfolio website with responsive design, custom modals, and dynamic components.',
+    type: 'live',
+    status: 'Live',
+    dot: 'green',
+    tags: ['HTML5', 'CSS3', 'JavaScript'],
+    image: 'images/projects/Portfolio.png',
+    link: 'https://devglee.vercel.app/'
+  },
+  {
+    id: 'p2',
     title: 'Read me when you need me',
     desc: 'A little book of love, comfort, and reminders',
     type: 'live',
@@ -705,26 +716,15 @@ const PROJECTS_DATA = [
     link: 'https://read-me-when-you-need-me-z1a2.vercel.app/'
   },
   {
-    id: 'p2',
-    title: 'Arca',
-    desc: 'A sari-sari store management system that allows store owners to keep track of their inventory, sales, and expenses.',
+    id: 'p3',
+    title: 'Library Management System',
+    desc: 'Library Management System is a web-based application that allows users to manage and track books in a library. It provides features for adding, editing, and deleting books, as well as searching for books by title or author.',
     type: 'dev',
     status: 'In development',
     dot: 'orange',
     tags: ['PHP', 'SQL', 'HTML', 'CSS', 'JavaScript'],
     image: 'images/projects/grocery-inventory.jpg',
     link: '#'
-  },
-  {
-    id: 'p3',
-    title: 'Glee Portfolio Website',
-    desc: 'Interactive modern portfolio website with responsive design, custom modals, and dynamic components.',
-    type: 'live',
-    status: 'Live',
-    dot: 'green',
-    tags: ['HTML5', 'CSS3', 'JavaScript'],
-    image: 'images/projects/Portfolio.png',
-    link: 'https://devglee.vercel.app/'
   }
 ];
 
