@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;700&family=Noto+Serif+JP:wght@600&text=%E5%A3%B1%E5%BC%90%E5%8F%82%E8%82%86%E9%BB%92%E6%BE%A4%E5%AD%A6&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="images/Logo.png" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css" />
   <link rel="stylesheet" href="css/style.css" />
   <noscript><style>#pageLoader{display:none!important}</style></noscript>
 </head>
@@ -21,9 +22,6 @@
 
   <!-- Floating Sakura Petals Layer -->
   <div class="sakura-container" aria-hidden="true">
-    <div class="petal"></div>
-    <div class="petal"></div>
-    <div class="petal"></div>
     <div class="petal"></div>
     <div class="petal"></div>
     <div class="petal"></div>
@@ -64,7 +62,7 @@
     </div>
   </div>
 
-  <!-- Certificate viewer -->
+  <!-- Certificate viewer modal -->
   <div class="modal-overlay" id="certModal" role="dialog" aria-modal="true" aria-labelledby="certModalTitle">
     <div class="modal-card cert-modal-card">
       <div class="project-preview cert-modal-media" id="certModalMedia"></div>
@@ -103,7 +101,7 @@
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
   </button>
 
-  <!-- NAV -->
+  <!-- SITE NAV -->
   <header class="site-nav" id="siteNav">
     <div class="nav-shell">
       <a class="brand" href="#hero" aria-label="Glee, back to top">
@@ -114,9 +112,9 @@
       <nav aria-label="Main">
         <ul class="nav-menu" id="navMenu">
           <li><a class="nav-link" href="#hero">Home</a></li>
-          <li><a class="nav-link" href="#about">About</a></li>
           <li><a class="nav-link" href="#skills">Skills</a></li>
           <li><a class="nav-link" href="#projects">Projects</a></li>
+          <li><a class="nav-link" href="#journey">Journey</a></li>
           <li class="nav-menu-contact"><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -137,7 +135,7 @@
 
   <main>
 
-    <!-- HERO -->
+    <!-- ENHANCED HERO (MERGED ABOUT ME CONTENT) -->
     <section class="hero" id="hero">
       <div class="container hero-grid">
         <div class="hero-copy">
@@ -149,23 +147,24 @@
           <h1 class="hero-name">Hi, I'm Gunther Lee.<br /><span>WEB DEVELOPER.</span></h1>
 
           <p class="hero-bio">
-            Information Technology student crafting clean, high-precision web applications. Dedicated to mastering clean code, seamless user experience, and robust backend logic.
+            Greetings! I am an Information Technology student driven to craft efficient and visually striking web solutions. Skilled in modern frontend &amp; backend execution, combining technical discipline with purpose.
           </p>
 
-          <ul class="hero-stats">
-            <li><span class="stat-value">3</span><span class="stat-label">Projects</span></li>
-            <li><span class="stat-value">BS IT</span><span class="stat-label">Education</span></li>
-            <li><span class="stat-value">Web + UI</span><span class="stat-label">Focus</span></li>
+          <!-- Key Quick Info List (from former About section) -->
+          <ul class="hero-quick-facts">
+            <li><i class="devicon-google-plain"></i> <strong>Location:</strong> Philippines</li>
+            <li><i class="devicon-academicons-plain"></i> <strong>Education:</strong> BS Information Technology</li>
+            <li><i class="devicon-chrome-plain"></i> <strong>Focus:</strong> Web Development, UI/UX &amp; Logic</li>
           </ul>
 
           <div class="hero-actions">
             <a href="#projects" class="btn btn-crimson">Explore Projects</a>
-            <a href="files/Gunther-Lee-Ordinario-CV.pdf" target="_blank" rel="noopener" class="btn btn-outline">View Resume</a>
-            <a href="https://github.com/Clumsy0717" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+            <a href="files/Gunther-Lee-Ordinario-CV.pdf" download class="btn btn-gold">Download CV</a>
+            <a href="https://github.com/Clumsy0717" target="_blank" rel="noopener" class="btn btn-ghost"><i class="devicon-github-original"></i> GitHub</a>
           </div>
         </div>
 
-        <!-- Profile Card -->
+        <!-- Profile Card with Icon Tags -->
         <div class="hero-card">
           <div class="card-status-pill">
             <span class="status-pulse"></span> Open for Honor &amp; Work
@@ -184,12 +183,14 @@
               <span class="card-badge">Web Dev &amp; UI</span>
             </div>
 
+            <!-- Tags with Language Icons -->
             <div class="card-tags">
-              <span class="mini-tag">HTML</span>
-              <span class="mini-tag">CSS</span>
-              <span class="mini-tag">JS</span>
-              <span class="mini-tag">PHP</span>
-              <span class="mini-tag">Python</span>
+              <span class="mini-tag"><i class="devicon-html5-plain colored"></i> HTML</span>
+              <span class="mini-tag"><i class="devicon-css3-plain colored"></i> CSS</span>
+              <span class="mini-tag"><i class="devicon-javascript-plain colored"></i> JS</span>
+              <span class="mini-tag"><i class="devicon-php-plain colored"></i> PHP</span>
+              <span class="mini-tag"><i class="devicon-python-plain colored"></i> Python</span>
+              <span class="mini-tag"><i class="devicon-mysql-plain colored"></i> MySQL</span>
             </div>
 
             <div class="card-foot">
@@ -200,56 +201,65 @@
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section class="section" id="about">
-      <div class="container about-grid">
-
-        <figure class="reveal">
-          <div class="reveal-card" id="revealCard">
-            <img src="images/Picture2.jpg" alt="Gunther Lee" class="reveal-img" />
-            <div class="spotlight-layer" id="spotlightLayer"></div>
-          </div>
-        </figure>
-
-        <div class="about-copy">
-          <h2 class="section-title">The Path Taken</h2>
-
-          <blockquote class="pull-quote">
-            Honor resides in precision, discipline, and constant growth. Every line of code is written with purpose.
-          </blockquote>
-
-          <p class="about-text">
-            Greetings. I am Gunther Lee Ordinario, an Information Technology student driven to craft efficient and visually striking web solutions. Skilled in PHP, Python, and SQL databases, I combine technical discipline with sharp frontend execution.
-          </p>
-
-          <dl class="facts">
-            <div>
-              <dt>Location</dt>
-              <dd>Philippines</dd>
-            </div>
-            <div>
-              <dt>Education</dt>
-              <dd>BS Information Technology</dd>
-            </div>
-            <div>
-              <dt>Main Focus</dt>
-              <dd>Web, UI and UX</dd>
-            </div>
-          </dl>
-
-          <div class="actions">
-            <a href="files/Gunther-Lee-Ordinario-CV.pdf" download class="btn btn-gold">Download CV</a>
-            <a href="mailto:guntherlee17@gmail.com" class="btn btn-outline">Send Message</a>
-            <a href="https://github.com/Clumsy0717" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
-          </div>
+    <!-- ARSENAL & SKILLS -->
+    <section class="section section-alt" id="skills">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Arsenal &amp; Tech Stack</h2>
+          <p class="section-intro">Mastery over modern front-end design, responsive user interfaces, and robust backend logic.</p>
         </div>
 
-      </div>
+        <div class="arsenal" id="skillsContainer"></div>
 
-      <div class="container about-more">
+        <div class="activity" id="activity">
+          <div class="activity-head">
+            <h3 class="activity-title">GitHub Activity Log</h3>
+            <a class="btn btn-ghost btn-sm" href="https://github.com/Clumsy0717" target="_blank" rel="noopener"><i class="devicon-github-original"></i> @Clumsy0717</a>
+          </div>
+          <div class="activity-body" id="activityBody">
+            <p class="activity-status">Loading activity...</p>
+          </div>
+          <div class="activity-foot" id="activityFoot" hidden>
+            <span id="activityTotal"></span>
+            <span class="legend" aria-hidden="true">
+              Less
+              <span class="legend-cell lv0"></span>
+              <span class="legend-cell lv1"></span>
+              <span class="legend-cell lv2"></span>
+              <span class="legend-cell lv3"></span>
+              <span class="legend-cell lv4"></span>
+              More
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED PROJECTS -->
+    <section class="section" id="projects">
+      <div class="container">
+        <h2 class="section-title">Featured Works</h2>
+
+        <div class="filters" role="group" aria-label="Filter projects">
+          <button type="button" class="filter active" aria-pressed="true" onclick="filterProjects('all', this)">All Projects</button>
+          <button type="button" class="filter" aria-pressed="false" onclick="filterProjects('live', this)">
+            <span class="status-dot green"></span>Live
+          </button>
+          <button type="button" class="filter" aria-pressed="false" onclick="filterProjects('dev', this)">
+            <span class="status-dot orange"></span>In Development
+          </button>
+        </div>
+
+        <div class="projects-grid" id="projectsContainer"></div>
+      </div>
+    </section>
+
+    <!-- JOURNEY (EXPERIENCE, EDUCATION, CERTS) -->
+    <section class="section section-alt" id="journey">
+      <div class="container">
         <div class="journey-head">
-          <h3 class="journey-title">My Journey</h3>
-          <p class="journey-intro">Where I have worked, studied and earned credentials.</p>
+          <h2 class="section-title">My Journey</h2>
+          <p class="journey-intro">Where I have worked, studied, and earned credentials.</p>
         </div>
 
         <div class="about-tabs" role="tablist" aria-label="Experience, education and certifications">
@@ -273,61 +283,8 @@
       </div>
     </section>
 
-    <!-- SKILLS -->
-    <section class="section section-alt" id="skills">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">Arsenal &amp; Skills</h2>
-          <p class="section-intro">Mastery over modern front-end design, responsive user interfaces, and the logic that underpins them.</p>
-        </div>
-
-        <div class="arsenal" id="skillsContainer"></div>
-
-        <div class="activity" id="activity">
-          <div class="activity-head">
-            <h3 class="activity-title">GitHub Activity Log</h3>
-            <a class="btn btn-ghost btn-sm" href="https://github.com/Clumsy0717" target="_blank" rel="noopener">@Clumsy0717</a>
-          </div>
-          <div class="activity-body" id="activityBody">
-            <p class="activity-status">Loading activity...</p>
-          </div>
-          <div class="activity-foot" id="activityFoot" hidden>
-            <span id="activityTotal"></span>
-            <span class="legend" aria-hidden="true">
-              Less
-              <span class="legend-cell lv0"></span>
-              <span class="legend-cell lv1"></span>
-              <span class="legend-cell lv2"></span>
-              <span class="legend-cell lv3"></span>
-              <span class="legend-cell lv4"></span>
-              More
-            </span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section class="section" id="projects">
-      <div class="container">
-        <h2 class="section-title">Featured Works</h2>
-
-        <div class="filters" role="group" aria-label="Filter projects">
-          <button type="button" class="filter active" aria-pressed="true" onclick="filterProjects('all', this)">All Projects</button>
-          <button type="button" class="filter" aria-pressed="false" onclick="filterProjects('live', this)">
-            <span class="status-dot green"></span>Live
-          </button>
-          <button type="button" class="filter" aria-pressed="false" onclick="filterProjects('dev', this)">
-            <span class="status-dot orange"></span>In Development
-          </button>
-        </div>
-
-        <div class="projects-grid" id="projectsContainer"></div>
-      </div>
-    </section>
-
     <!-- CONTACT -->
-    <section class="section section-alt" id="contact">
+    <section class="section" id="contact">
       <div class="container contact-grid">
 
         <div class="contact-info">
@@ -348,10 +305,6 @@
             <li>
               <span class="contact-label">GitHub</span>
               <a href="https://github.com/Clumsy0717" target="_blank" rel="noopener">Clumsy0717</a>
-            </li>
-            <li>
-              <span class="contact-label">LinkedIn</span>
-              <a href="https://www.linkedin.com" target="_blank" rel="noopener">View Profile</a>
             </li>
             <li>
               <span class="contact-label">Facebook</span>
