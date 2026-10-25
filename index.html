@@ -114,7 +114,7 @@
       <nav aria-label="Main">
         <ul class="nav-menu" id="navMenu">
           <li><a class="nav-link" href="#hero">Home</a></li>
-          <li><a class="nav-link" href="#about">About</a></li>
+          <li><a class="nav-link" href="#journey">Journey</a></li>
           <li><a class="nav-link" href="#skills">Skills</a></li>
           <li><a class="nav-link" href="#projects">Projects</a></li>
           <li class="nav-menu-contact"><a class="nav-link" href="#contact">Contact</a></li>
@@ -149,20 +149,29 @@
           <h1 class="hero-name">Hi, I'm Gunther Lee.<br /><span>WEB DEVELOPER.</span></h1>
 
           <p class="hero-bio">
-            Information Technology student crafting clean, high-precision web applications. Dedicated to mastering clean code, seamless user experience, and robust backend logic.
+            Greetings. I am Gunther Lee Ordinario, an Information Technology student driven to craft efficient and visually striking web solutions. Skilled in PHP, Python, and SQL databases, I combine technical discipline with sharp frontend execution.
           </p>
 
-          <ul class="hero-stats">
-            <li><span class="stat-value">3</span><span class="stat-label">Projects</span></li>
-            <li><span class="stat-value">BS IT</span><span class="stat-label">Education</span></li>
-            <li><span class="stat-value">Web + UI</span><span class="stat-label">Focus</span></li>
-          </ul>
+          <blockquote class="hero-quote">
+            Honor resides in precision, discipline, and constant growth. Every line of code is written with purpose.
+          </blockquote>
+
+          <dl class="facts">
+            <div><dt>Location</dt><dd>Philippines</dd></div>
+            <div><dt>Education</dt><dd>BS Information Technology</dd></div>
+            <div><dt>Main focus</dt><dd>Web, UI and UX</dd></div>
+          </dl>
 
           <div class="hero-actions">
             <a href="#projects" class="btn btn-crimson">Explore Projects</a>
-            <a href="files/Gunther-Lee-Ordinario-CV.pdf" target="_blank" rel="noopener" class="btn btn-outline">View Resume</a>
-            <a href="https://github.com/Clumsy0717" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+            <a href="files/Gunther-Lee-Ordinario-CV.pdf" download class="btn btn-gold">Download CV</a>
           </div>
+
+          <ul class="hero-links">
+            <li><a href="files/Gunther-Lee-Ordinario-CV.pdf" target="_blank" rel="noopener">View Resume</a></li>
+            <li><a href="https://github.com/Clumsy0717" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="mailto:guntherlee17@gmail.com">Send a message</a></li>
+          </ul>
         </div>
 
         <!-- Profile Card -->
@@ -171,8 +180,9 @@
             <span class="status-pulse"></span> Open for Honor &amp; Work
           </div>
 
-          <div class="card-photo">
+          <div class="card-photo" id="revealCard">
             <img src="images/Right Picture.png" alt="Portrait of Gunther Lee" />
+            <div class="spotlight-layer" id="spotlightLayer"></div>
           </div>
 
           <div class="card-info">
@@ -185,11 +195,11 @@
             </div>
 
             <div class="card-tags">
-              <span class="mini-tag">HTML</span>
-              <span class="mini-tag">CSS</span>
-              <span class="mini-tag">JS</span>
-              <span class="mini-tag">PHP</span>
-              <span class="mini-tag">Python</span>
+              <span class="mini-tag"><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/html5/html5-original.svg" alt="" width="14" height="14">HTML</span>
+              <span class="mini-tag"><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/css3/css3-original.svg" alt="" width="14" height="14">CSS</span>
+              <span class="mini-tag"><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/javascript/javascript-original.svg" alt="" width="14" height="14">JS</span>
+              <span class="mini-tag"><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/php/php-original.svg" alt="" width="14" height="14">PHP</span>
+              <span class="mini-tag"><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/python/python-original.svg" alt="" width="14" height="14">Python</span>
             </div>
 
             <div class="card-foot">
@@ -200,56 +210,12 @@
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section class="section" id="about">
-      <div class="container about-grid">
-
-        <figure class="reveal">
-          <div class="reveal-card" id="revealCard">
-            <img src="images/Picture2.jpg" alt="Gunther Lee" class="reveal-img" />
-            <div class="spotlight-layer" id="spotlightLayer"></div>
-          </div>
-        </figure>
-
-        <div class="about-copy">
-          <h2 class="section-title">The Path Taken</h2>
-
-          <blockquote class="pull-quote">
-            Honor resides in precision, discipline, and constant growth. Every line of code is written with purpose.
-          </blockquote>
-
-          <p class="about-text">
-            Greetings. I am Gunther Lee Ordinario, an Information Technology student driven to craft efficient and visually striking web solutions. Skilled in PHP, Python, and SQL databases, I combine technical discipline with sharp frontend execution.
-          </p>
-
-          <dl class="facts">
-            <div>
-              <dt>Location</dt>
-              <dd>Philippines</dd>
-            </div>
-            <div>
-              <dt>Education</dt>
-              <dd>BS Information Technology</dd>
-            </div>
-            <div>
-              <dt>Main Focus</dt>
-              <dd>Web, UI and UX</dd>
-            </div>
-          </dl>
-
-          <div class="actions">
-            <a href="files/Gunther-Lee-Ordinario-CV.pdf" download class="btn btn-gold">Download CV</a>
-            <a href="mailto:guntherlee17@gmail.com" class="btn btn-outline">Send Message</a>
-            <a href="https://github.com/Clumsy0717" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="container about-more">
-        <div class="journey-head">
-          <h3 class="journey-title">My Journey</h3>
-          <p class="journey-intro">Where I have worked, studied and earned credentials.</p>
+    <!-- JOURNEY -->
+    <section class="section" id="journey">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">My Journey</h2>
+          <p class="section-intro">Where I have worked, studied and earned credentials.</p>
         </div>
 
         <div class="about-tabs" role="tablist" aria-label="Experience, education and certifications">

@@ -76,7 +76,7 @@
   border-radius: 50%;
   color: var(--gold);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
 }
 
 .theme-toggle:hover {
@@ -209,7 +209,7 @@ a { color: inherit; }
   cursor: pointer;
   background: var(--surface);
   color: var(--text);
-  transition: all 0.2s ease;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
 }
 .btn:hover {
   transform: translateY(-2px);
@@ -747,7 +747,7 @@ body.ready .hero-card { animation: rise 0.8s 0.15s cubic-bezier(0.2, 0.7, 0.2, 1
   border: 1px solid var(--border);
   border-radius: 999px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
 }
 .filter:hover { color: var(--text); border-color: var(--border-strong); }
 .filter.active {
@@ -1781,18 +1781,9 @@ body.ready .hero-copy > .hero-name {
 /* ============================================================
    ABOUT: "My Journey" tabs
 ============================================================ */
-.about-more {
-  margin-top: clamp(4rem, 8vw, 6rem);
-  padding-top: clamp(3rem, 6vw, 4.5rem);
-  border-top: 1px solid var(--border);
-}
-.journey-head { margin-bottom: 2rem; }
-.journey-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
-  line-height: 1.1;
-}
-.journey-intro { margin-top: 0.5rem; color: var(--muted); }
+
+
+
 
 .about-tabs {
   display: flex;
@@ -1845,12 +1836,6 @@ body.ready .hero-copy > .hero-name {
    MOBILE LAYER: compact nav, reordered About, tighter rhythm
 ============================================================ */
 
-/* Tablets and phones: text first, photo after it */
-@media (max-width: 860px) {
-  .about-grid { display: flex; flex-direction: column; align-items: stretch; gap: 2.5rem; }
-  .about-copy { order: 1; }
-  .reveal { order: 2; width: min(100%, 300px); margin-inline: auto; }
-}
 
 /* Phones (iPhone 12 and similar) */
 @media (max-width: 480px) {
@@ -1866,8 +1851,6 @@ body.ready .hero-copy > .hero-name {
   .theme-toggle { width: 36px; height: 36px; }
   .nav-toggle { min-height: 36px; padding: 0.4rem 0.8rem; font-size: 0.85rem; }
 
-  .about-more { margin-top: 3.5rem; padding-top: 2.5rem; }
-  .journey-head { margin-bottom: 1.5rem; }
 
   /* About facts as tidy rows, buttons in a clean grid */
   .facts { grid-template-columns: minmax(0, 1fr); gap: 0.6rem; margin-block: 1.5rem; }
@@ -1890,3 +1873,97 @@ body.ready .hero-copy > .hero-name {
 }
 
 .nav-toggle { align-items: center; justify-content: center; line-height: 1; }
+
+
+/* ============================================================
+   HERO: About info lives here now
+============================================================ */
+.hero-quote {
+  max-width: 46ch;
+  margin: 1.5rem 0 0;
+  padding-left: 1.1rem;
+  border-left: 3px solid var(--gold);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  letter-spacing: 0.02em;
+}
+.hero .facts { max-width: 36rem; margin-block: 1.75rem 0; }
+.hero-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin: 1.25rem 0 0; padding: 0; list-style: none; }
+.hero-links a {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 5px;
+  transition: color 0.2s var(--ease-out), text-decoration-color 0.2s var(--ease-out);
+}
+body.ready .hero-copy > :nth-child(6) { animation-delay: 0.4s; }
+
+/* Photo reveal (moved from About) */
+.card-photo { overflow: hidden; cursor: crosshair; user-select: none; -webkit-user-select: none; }
+
+/* Language icons */
+.tag, .mini-tag { display: inline-flex; align-items: center; gap: 0.4rem; }
+.tech-icon { width: 14px; height: 14px; flex: none; }
+.tech-icon.invert { filter: invert(1); }
+[data-theme="light"] .tech-icon.invert { filter: none; }
+
+/* ============================================================
+   MOTION AND TOUCH POLISH
+   Strong ease-out, specific properties, press feedback,
+   hover only where hover exists, subtle enters.
+============================================================ */
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; -webkit-tap-highlight-color: transparent; }
+h1, h2, h3 { text-wrap: balance; }
+p, li, dd { text-wrap: pretty; }
+button, a, .btn, .about-tab, .filter, .skill-chip { touch-action: manipulation; }
+
+.btn {
+  transition: background-color 0.2s var(--ease-out), border-color 0.2s var(--ease-out),
+              color 0.2s var(--ease-out), transform 0.16s var(--ease-out);
+}
+.btn:active, .filter:active, .about-tab:active,
+.mode-toggle:active, .theme-toggle:active, .nav-toggle:active, .scroll-top:active { transform: scale(0.97); }
+
+.skill-chip, .project-card, .cert-card, .edu-card, .timeline-card {
+  transition: border-color 0.25s var(--ease-out), transform 0.25s var(--ease-out), background-color 0.25s var(--ease-out);
+}
+
+/* Tabs and dialogs ease in instead of snapping */
+@keyframes panelIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes overlayIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modalIn { from { opacity: 0; transform: translateY(8px) scale(0.97); } to { opacity: 1; transform: none; } }
+
+.about-panel:not([hidden]) { animation: panelIn 0.28s var(--ease-out); }
+.about-panel:not([hidden]) :is(.timeline-item, .edu-card, .cert-card) { animation: panelIn 0.4s var(--ease-out) both; }
+.about-panel:not([hidden]) :is(.timeline-item, .edu-card, .cert-card):nth-child(2) { animation-delay: 0.05s; }
+.about-panel:not([hidden]) :is(.timeline-item, .edu-card, .cert-card):nth-child(3) { animation-delay: 0.1s; }
+.about-panel:not([hidden]) :is(.timeline-item, .edu-card, .cert-card):nth-child(4) { animation-delay: 0.15s; }
+
+.modal-overlay.active { animation: overlayIn 0.2s var(--ease-out); }
+.modal-overlay.active .modal-card { animation: modalIn 0.28s var(--ease-out); }
+.site-nav.open .nav-menu { animation: panelIn 0.22s var(--ease-out); }
+
+/* Hover that sticks on touch screens is confusing: neutralise lifts there */
+@media (hover: none) {
+  .skill-chip:hover, .project-card:hover, .cert-card:hover, .edu-card:hover, .timeline-card:hover { transform: none; }
+  .card-photo:hover .spotlight-layer { opacity: 0; }
+  .card-photo .spotlight-layer.on { opacity: 1; }
+}
+@media (hover: hover) {
+  .card-photo:hover .spotlight-layer { opacity: 1; }
+  .hero-links a:hover { color: var(--text); text-decoration-color: var(--gold); }
+}
+
+/* Comfortable tap targets on phones */
+@media (max-width: 480px) {
+  .mode-toggle { height: 40px; }
+  .theme-toggle { width: 40px; height: 40px; }
+  .nav-toggle { min-height: 40px; }
+  .hero-links { gap: 0.6rem 1.25rem; }
+}

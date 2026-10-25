@@ -136,7 +136,7 @@ const CERTIFICATES_DATA = [
     link: 'files/Python_Essentials_1.pdf'                                 // optional: credential or verification URL
   },
   {
-    title: 'Intro to Cybersecurity',
+    title: 'Another Certificate',
     issuer: 'Cisco Networking Academy Program',
     date: 'October 2024',
     image: 'images/certificates/Intro_Cybersecurity.png',
@@ -706,17 +706,6 @@ const PROJECTS_DATA = [
   },
   {
     id: 'p2',
-    title: 'Read me when you need me',
-    desc: 'A little book of love, comfort, and reminders',
-    type: 'live',
-    status: 'Live',
-    dot: 'green',
-    tags: ['Html', 'Css', 'JavaScript'],
-    image: 'images/projects/ReadMeWhenYouNeedMe.png',
-    link: 'https://read-me-when-you-need-me-z1a2.vercel.app/'
-  },
-  {
-    id: 'p3',
     title: 'Library Management System',
     desc: 'Library Management System is a web-based application that allows users to manage and track books in a library. It provides features for adding, editing, and deleting books, as well as searching for books by title or author.',
     type: 'dev',
@@ -728,8 +717,45 @@ const PROJECTS_DATA = [
   }
 ];
 
+/* ============================================================
+   LANGUAGE AND TOOL ICONS
+   Any tag whose name is listed here shows its icon automatically.
+============================================================ */
+const TECH_ICONS = {
+  'html': 'html5/html5-original.svg',   'html5': 'html5/html5-original.svg',
+  'css': 'css3/css3-original.svg',      'css3': 'css3/css3-original.svg',
+  'js': 'javascript/javascript-original.svg', 'javascript': 'javascript/javascript-original.svg',
+  'php': 'php/php-original.svg',        'python': 'python/python-original.svg',
+  'sql': 'mysql/mysql-original.svg',    'mysql': 'mysql/mysql-original.svg',
+  'bootstrap': 'bootstrap/bootstrap-original.svg', 'react': 'react/react-original.svg',
+  'c++': 'cplusplus/cplusplus-original.svg', 'java': 'java/java-original.svg',
+  'typescript': 'typescript/typescript-original.svg', 'node.js': 'nodejs/nodejs-original.svg',
+  'figma': 'figma/figma-original.svg', 'git': 'git/git-original.svg',
+  'github': 'github/github-original.svg'
+};
+const TECH_INVERT = ['github'];   // dark logos that need to flip on a dark background
+
+const TECH_SVGS = {
+  'excel': '<svg class="tech-icon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="4" fill="#1D6F42"/><path d="M8 7l8 10M16 7l-8 10" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>',
+  'google sheets': '<svg class="tech-icon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M6 2h8l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="#23A566"/><path d="M14 2v5h5z" fill="#0F8A4B"/><rect x="7.5" y="11" width="9" height="7" rx=".8" fill="none" stroke="#fff" stroke-width="1.3"/><path d="M7.5 14.5h9M12 11v7" stroke="#fff" stroke-width="1.3"/></svg>'
+};
+
+function techIcon(name) {
+  const key = String(name).trim().toLowerCase();
+  if (TECH_SVGS[key]) return TECH_SVGS[key];
+  if (!TECH_ICONS[key]) return '';
+  const cls = TECH_INVERT.includes(key) ? 'tech-icon invert' : 'tech-icon';
+  return `<img class="${cls}" src="${DEVICON}/${TECH_ICONS[key]}" alt="" width="14" height="14">`;
+}
+
+// If an icon can not load (offline, blocked), drop it quietly and keep the text
+document.addEventListener('error', (e) => {
+  const el = e.target;
+  if (el && el.classList && el.classList.contains('tech-icon')) el.remove();
+}, true);
+
 function tagsMarkup(tags) {
-  return tags.map((t) => `<li class="tag">${t}</li>`).join('');
+  return tags.map((t) => `<li class="tag">${techIcon(t)}${t}</li>`).join('');
 }
 
 function previewInner(proj) {
