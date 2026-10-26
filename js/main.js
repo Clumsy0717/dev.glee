@@ -302,6 +302,73 @@ function setupAboutTabs() {
 }
 
 /* ============================================================
+   HERO SCENE: the hero card turns into the next section on scroll
+   Scroll position (0 to 1) drives a few CSS variables on .stage.
+============================================================ */
+function setupHeroScene() {
+  const scene = document.getElementById('hero');
+  const stage = scene && scene.querySelector('.stage');
+  const portrait = document.getElementById('heroPortrait');
+  const slot = document.getElementById('portraitSlot');
+  if (!scene || !stage || !portrait || !slot) return;
+  // Reduced motion: the hero and the next section simply stack, nothing is pinned
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  scene.classList.add('scene-live');
+
+  const clamp = (v) => Math.min(1, Math.max(0, v));
+  const seg = (p, start, end) => clamp((p - start) / (end - start));
+  const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+  const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  let sceneTop = 0;
+  let total = 1;
+  let ticking = false;
+
+  // Where the portrait starts and where it must land (both measured inside the stage)
+  function measure() {
+    sceneTop = scene.getBoundingClientRect().top + window.scrollY;
+    total = Math.max(1, scene.offsetHeight - window.innerHeight);
+    if (portrait.naturalWidth && portrait.naturalHeight) {
+      stage.style.setProperty('--portrait-ratio', (portrait.naturalWidth / portrait.naturalHeight).toFixed(4));
+    }
+    portrait.style.transform = 'none';
+    const from = portrait.getBoundingClientRect();
+    const to = slot.getBoundingClientRect();
+    portrait.style.transform = '';
+    if (from.width && to.width) {
+      stage.style.setProperty('--dx', `${(to.left - from.left).toFixed(1)}px`);
+      stage.style.setProperty('--dy', `${(to.top - from.top).toFixed(1)}px`);
+      stage.style.setProperty('--ds', (to.width / from.width).toFixed(4));
+    }
+  }
+
+  function update() {
+    ticking = false;
+    const p = clamp((window.scrollY - sceneTop) / total);
+    const set = (name, value) => stage.style.setProperty(name, value.toFixed(4));
+    set('--a', easeOut(seg(p, 0.04, 0.46)));      // words spread, small texts leave
+    set('--b', easeInOut(seg(p, 0.22, 0.7)));     // light card fades, dark grid arrives
+    set('--m', easeInOut(seg(p, 0.3, 0.86)));     // portrait travels into its photo card
+    set('--c', easeOut(seg(p, 0.5, 0.82)));       // statement appears
+    set('--d', easeOut(seg(p, 0.62, 0.94)));      // aside and second photo appear
+    stage.classList.toggle('hero-fading', p > 0.45);
+    stage.classList.toggle('hero-gone', p > 0.72);
+  }
+
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }
+
+  const refresh = () => { measure(); update(); };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', refresh);
+  window.addEventListener('load', refresh);
+  if (portrait.complete) refresh(); else portrait.addEventListener('load', refresh);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
+  refresh();
+}
+
+/* ============================================================
    SCROLL REVEAL: sections ease in as they come into view
 ============================================================ */
 function setupScrollReveal() {
@@ -505,33 +572,6 @@ function setupTypewriter() {
   }
 
   setTimeout(cycle, 600);
-}
-
-/* ============================================================
-   SPOTLIGHT REVEAL
-============================================================ */
-function setupRevealSlider() {
-  const card = document.getElementById('revealCard');
-  const spotlight = document.getElementById('spotlightLayer');
-  if (!card || !spotlight) return;
-
-  const moveTo = (clientX, clientY) => {
-    const rect = card.getBoundingClientRect();
-    spotlight.style.setProperty('--mouse-x', `${clientX - rect.left}px`);
-    spotlight.style.setProperty('--mouse-y', `${clientY - rect.top}px`);
-  };
-
-  card.addEventListener('mousemove', (e) => moveTo(e.clientX, e.clientY));
-
-  card.addEventListener('touchstart', (e) => {
-    spotlight.classList.add('on');
-    moveTo(e.touches[0].clientX, e.touches[0].clientY);
-  }, { passive: true });
-  card.addEventListener('touchmove', (e) => {
-    moveTo(e.touches[0].clientX, e.touches[0].clientY);
-  }, { passive: true });
-  card.addEventListener('touchend', () => spotlight.classList.remove('on'));
-  card.addEventListener('touchcancel', () => spotlight.classList.remove('on'));
 }
 
 /* ============================================================
@@ -934,8 +974,8 @@ document.addEventListener('DOMContentLoaded', () => {
   setupScrollSpy();
   setupScrollTop();
   setupTypewriter();
+  setupHeroScene();
   setupModal();
-  setupRevealSlider();
   renderSkills();
   renderExperience();
   renderEducation();

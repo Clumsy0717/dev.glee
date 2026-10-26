@@ -1967,3 +1967,252 @@ button, a, .btn, .about-tab, .filter, .skill-chip { touch-action: manipulation; 
   .nav-toggle { min-height: 40px; }
   .hero-links { gap: 0.6rem 1.25rem; }
 }
+
+
+/* ============================================================
+   HERO SCENE (editorial poster hero that turns into the next section)
+   Ground, ink, one accent. Giant condensed type, one dominant portrait.
+============================================================ */
+:root {
+  --hx-top: calc(var(--nav-h) + 8px);
+  --hx-h: calc(100vh - var(--nav-h) - 20px);
+  --font-poster: 'Oswald', 'Bebas Neue', Impact, sans-serif;
+  --paper: #efede8;
+  --ink-dark: #131418;
+  --ink: #14151a;
+  --gold-btn: #d9b44a;
+}
+@supports (height: 100svh) { :root { --hx-h: calc(100svh - var(--nav-h) - 20px); } }
+
+.scene { position: relative; margin-top: calc(-1 * var(--nav-h)); background: var(--ink-dark); }
+.stage { position: relative; min-height: 600px; background: var(--ink-dark); overflow: hidden; }
+.scene-live { height: 270vh; }
+.scene-live .stage { position: sticky; top: 0; height: 100vh; }
+@supports (height: 100svh) { .scene-live .stage { height: 100svh; } }
+
+/* Light hero card */
+.hx-card {
+  position: absolute;
+  top: var(--hx-top);
+  left: 12px;
+  right: 12px;
+  height: var(--hx-h);
+  z-index: 2;
+  overflow: hidden;
+  border-radius: 28px;
+  color: var(--ink);
+}
+.hx-bg { position: absolute; inset: 0; background: var(--paper); }
+
+.hx-facts {
+  position: absolute;
+  top: 1.25rem;
+  left: clamp(1rem, 2.6vw, 2.25rem);
+  right: clamp(1rem, 2.6vw, 2.25rem);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0;
+  font-size: 0.92rem;
+}
+.hx-facts dt { color: #6a6c73; font-size: 0.8rem; }
+.hx-facts dd { margin: 0.15rem 0 0; font-weight: 700; }
+
+/* Giant name, set behind the portrait */
+.hx-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 19%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 0;
+  padding-inline: clamp(1rem, 3vw, 3rem);
+  font-family: var(--font-poster);
+  font-size: clamp(5rem, 13.5vw, 14rem);
+  line-height: 0.86;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.hx-a { font-weight: 700; }
+.hx-b { font-weight: 200; color: #3a3c43; }
+
+.hx-left {
+  position: absolute;
+  left: clamp(1rem, 2.6vw, 2.25rem);
+  bottom: clamp(1rem, 2.4vw, 2rem);
+  width: min(24rem, 25%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
+}
+.hx-tag { margin: 0; font: 500 0.95rem/1 var(--font-poster); letter-spacing: 0.06em; text-transform: uppercase; color: #3a3c43; }
+.hx-bio { margin: 0; font-size: 0.98rem; line-height: 1.5; color: #2a2c32; }
+.hx-stack { display: flex; flex-wrap: wrap; gap: 0.4rem 0.9rem; margin: 0; padding: 0; list-style: none; }
+.hx-stack li { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 600; color: #2a2c32; }
+.hx-links { display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; margin: 0; padding: 0; list-style: none; }
+.hx-links a { font-size: 0.88rem; color: #4a4c53; text-decoration: underline; text-decoration-color: rgba(20, 21, 26, 0.25); text-underline-offset: 4px; transition: color 0.2s var(--ease-out), text-decoration-color 0.2s var(--ease-out); }
+.hx-right {
+  position: absolute;
+  right: clamp(1rem, 2.6vw, 2.25rem);
+  bottom: clamp(1rem, 2.4vw, 2rem);
+  max-width: 17rem;
+  margin: 0;
+  text-align: right;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: #2a2c32;
+}
+
+.hx-btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 46px;
+  padding: 0 1.4rem;
+  font: 500 0.95rem/1 var(--font-poster);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: background-color 0.2s var(--ease-out), transform 0.16s var(--ease-out);
+}
+.hx-btn-gold { color: var(--ink); background: var(--gold-btn); }
+.hx-btn:active { transform: scale(0.97); }
+@media (hover: hover) {
+  .hx-btn-gold:hover { background: #e7c766; }
+  .hx-links a:hover { color: var(--ink); text-decoration-color: var(--gold-btn); }
+}
+
+/* Portrait: stage level, so it can travel out of the card */
+.hx-portrait {
+  position: absolute;
+  top: var(--hx-top);
+  left: 0;
+  right: 0;
+  height: var(--hx-h);
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  pointer-events: none;
+}
+.hx-portrait img {
+  height: 92%;
+  width: auto;
+  max-width: none;
+  transform-origin: 0 0;
+  filter: grayscale(1) contrast(1.06);
+  will-change: transform;
+  transform: translate(calc(var(--m, 0) * var(--dx, 0px)), calc(var(--m, 0) * var(--dy, 0px))) scale(calc(1 + var(--m, 0) * (var(--ds, 1) - 1)));
+}
+
+/* The next section */
+.philo {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  margin-top: calc(var(--hx-top) + var(--hx-h) + 12px);
+  padding: calc(var(--nav-h) + 3.5rem) 5vw 3rem;
+  overflow: hidden;
+  color: #eceae4;
+  background: var(--ink-dark);
+}
+.philo-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: min(9vw, 130px) min(9vw, 130px);
+  pointer-events: none;
+}
+.philo-label { position: relative; margin: 0 0 1.1rem; font-size: 0.85rem; color: #9a9da6; }
+.philo-title {
+  position: relative;
+  max-width: 14em;
+  margin: 0;
+  font-family: var(--font-poster);
+  font-size: clamp(2rem, 4.4vw, 4.5rem);
+  font-weight: 700;
+  line-height: 0.98;
+  text-transform: uppercase;
+  color: #f1efe9;
+}
+.philo-aside {
+  position: absolute;
+  right: 5vw;
+  top: calc(var(--nav-h) + 3.5rem);
+  width: min(20rem, 26vw);
+}
+.philo-aside p { margin: 0 0 1.25rem; font-size: 1rem; line-height: 1.55; color: #c9c7c0; }
+.philo-cards { margin: 0; padding: 0; list-style: none; }
+.philo-card { position: absolute; margin: 0; }
+.philo-card-a { left: 10vw; bottom: 8vh; }
+.philo-card-b { left: 56vw; bottom: 4vh; }
+@supports (height: 100svh) { .philo-card-a { bottom: 8svh; } .philo-card-b { bottom: 4svh; } }
+.philo-frame {
+  width: clamp(110px, min(17vw, 27vh), 280px);
+  aspect-ratio: var(--portrait-ratio, 0.8);
+  overflow: hidden;
+  background: #26282e;
+}
+.philo-frame img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+.philo-card p { margin: 0.6rem 0 0; font: 500 0.82rem/1 var(--font-poster); letter-spacing: 0.05em; text-transform: uppercase; color: #c9c7c0; }
+
+/* Live mode: scroll variables drive the transformation */
+.scene-live .stage { --a: 0; --b: 0; --m: 0; --c: 0; --d: 0; --dx: 0px; --dy: 0px; --ds: 1; }
+.scene-live .philo { position: absolute; inset: 0; margin: 0; min-height: 0; pointer-events: none; }
+.scene-live .hero-gone .philo { pointer-events: auto; }
+.scene-live .hx-bg { opacity: calc(1 - var(--b)); }
+.scene-live .hx-card {
+  transform: scale(calc(1 - var(--b) * 0.05));
+  border-radius: calc(28px + var(--b) * 20px);
+}
+.scene-live .hx-a { transform: translateX(calc(var(--a) * -14vw)); opacity: max(0, calc(1 - var(--a) * 1.25)); }
+.scene-live .hx-b { transform: translateX(calc(var(--a) * 14vw)); opacity: max(0, calc(1 - var(--a) * 1.25)); }
+.scene-live .hx-facts, .scene-live .hx-left, .scene-live .hx-right {
+  opacity: max(0, calc(1 - var(--a) * 1.7));
+  transform: translateY(calc(var(--a) * 28px));
+}
+.scene-live .hero-fading .hx-card { pointer-events: none; }
+.scene-live .hero-gone .hx-card { visibility: hidden; }
+.scene-live .philo-grid { opacity: var(--b); }
+.scene-live .philo-label, .scene-live .philo-title { opacity: var(--c); transform: translateY(calc((1 - var(--c)) * 36px)); }
+.scene-live .philo-aside, .scene-live .philo-card-b { opacity: var(--d); transform: translateY(calc((1 - var(--d)) * 36px)); }
+.scene-live .philo-card-a p { opacity: var(--d); }
+.scene-live #portraitSlot { background-color: rgb(38 40 46 / var(--m)); }
+.scene-live .slot-img { display: none; }
+
+/* Entrance after the loader */
+@keyframes wordIn { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes portraitIn { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+body.ready .hx-a { animation: wordIn 0.9s var(--ease-out) backwards; }
+body.ready .hx-b { animation: wordIn 0.9s 0.12s var(--ease-out) backwards; }
+body.ready .hx-portrait img { animation: portraitIn 1.1s 0.15s var(--ease-out) backwards; }
+body.ready .hx-facts, body.ready .hx-left, body.ready .hx-right { animation: fadeIn 0.8s 0.55s ease-out backwards; }
+
+/* Phones and tablets: stacked words, portrait above the copy */
+@media (max-width: 1000px) {
+  .hx-card { border-radius: 22px; }
+  .hx-facts div:nth-child(2) { display: none; }
+  .hx-title { top: 12%; flex-direction: column; align-items: flex-start; font-size: clamp(3.5rem, 18.5vw, 11rem); }
+  .hx-b { align-self: flex-end; }
+  .hx-portrait { padding-bottom: calc(var(--hx-h) * 0.34); }
+  .hx-portrait img { height: 64%; }
+  .hx-left { width: min(34rem, calc(100% - 2rem)); gap: 0.7rem; }
+  .hx-bio { font-size: 0.92rem; }
+  .hx-stack { display: none; }
+  .hx-right { display: none; }
+
+  .philo { padding: calc(var(--nav-h) + 1.75rem) 6vw 2rem; }
+  .philo-title { max-width: 100%; font-size: clamp(1.75rem, 5.4vw, 3rem); }
+  .philo-aside { position: relative; top: auto; right: auto; width: min(30rem, 100%); margin-top: 1.1rem; }
+  .philo-aside p { font-size: 0.92rem; margin-bottom: 0.9rem; }
+  .philo-frame { width: clamp(110px, 30vw, 220px); }
+  .philo-card-a { left: 6vw; bottom: 3svh; }
+  .philo-card-b { left: 50vw; bottom: 7svh; }
+}

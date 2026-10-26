@@ -9,7 +9,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;700&family=Noto+Serif+JP:wght@600&text=%E5%A3%B1%E5%BC%90%E5%8F%82%E8%82%86%E9%BB%92%E6%BE%A4%E5%AD%A6&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Oswald:wght@200;500;700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;700&family=Noto+Serif+JP:wght@600&text=%E5%A3%B1%E5%BC%90%E5%8F%82%E8%82%86%E9%BB%92%E6%BE%A4%E5%AD%A6&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="images/Logo.png" />
   <link rel="stylesheet" href="css/style.css" />
   <noscript><style>#pageLoader{display:none!important}</style></noscript>
@@ -137,75 +137,64 @@
 
   <main>
 
-    <!-- HERO -->
-    <section class="hero" id="hero">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <div class="hero-tag-badge">
-            <span class="sr-only">Information Technology student and web developer</span>
-            <span aria-hidden="true">&gt; <span id="typewriter"></span><span class="caret">_</span></span>
+    <!-- HERO SCENE: the hero card turns into the next section as you scroll -->
+    <section class="scene" id="hero" aria-label="Introduction">
+      <div class="stage">
+
+        <!-- Next section (revealed by scrolling) -->
+        <div class="philo">
+          <div class="philo-grid" aria-hidden="true"></div>
+          <p class="philo-label">[ philosophy ]</p>
+          <h2 class="philo-title">Honor resides in precision, discipline and constant growth.</h2>
+
+          <div class="philo-aside">
+            <p>Every line of code is written with purpose. I combine technical discipline with sharp frontend execution.</p>
+            <a class="hx-btn hx-btn-gold" href="#journey">[ My Journey ]</a>
           </div>
 
-          <h1 class="hero-name">Hi, I'm Gunther Lee.<br /><span>WEB DEVELOPER.</span></h1>
-
-          <p class="hero-bio">
-            Greetings. I am Gunther Lee Ordinario, an Information Technology student driven to craft efficient and visually striking web solutions. Skilled in PHP, Python, and SQL databases, I combine technical discipline with sharp frontend execution.
-          </p>
-
-          <blockquote class="hero-quote">
-            Honor resides in precision, discipline, and constant growth. Every line of code is written with purpose.
-          </blockquote>
-
-          <dl class="facts">
-            <div><dt>Location</dt><dd>Philippines</dd></div>
-            <div><dt>Education</dt><dd>BS Information Technology</dd></div>
-            <div><dt>Main focus</dt><dd>Web, UI and UX</dd></div>
-          </dl>
-
-          <div class="hero-actions">
-            <a href="#projects" class="btn btn-crimson">Explore Projects</a>
-            <a href="files/Gunther-Lee-Ordinario-CV.pdf" download class="btn btn-gold">Download CV</a>
-          </div>
-
-          <ul class="hero-links">
-            <li><a href="files/Gunther-Lee-Ordinario-CV.pdf" target="_blank" rel="noopener">View Resume</a></li>
-            <li><a href="https://github.com/Clumsy0717" target="_blank" rel="noopener">GitHub</a></li>
-            <li><a href="mailto:guntherlee17@gmail.com">Send a message</a></li>
+          <ul class="philo-cards">
+            <li class="philo-card philo-card-a">
+              <div class="philo-frame" id="portraitSlot"><img class="slot-img" src="images/Right Picture.png" alt="" /></div>
+              <p>Precision</p>
+            </li>
+            <li class="philo-card philo-card-b">
+              <div class="philo-frame"><img src="images/Picture2.jpg" alt="Gunther Lee" /></div>
+              <p>Purpose</p>
+            </li>
           </ul>
         </div>
 
-        <!-- Profile Card -->
-        <div class="hero-card">
-          <div class="card-status-pill">
-            <span class="status-pulse"></span> Open for Honor &amp; Work
+        <!-- Hero card -->
+        <div class="hx-card">
+          <div class="hx-bg"></div>
+
+          <dl class="hx-facts">
+            <div><dt>[ location ]</dt><dd>Philippines</dd></div>
+            <div><dt>[ education ]</dt><dd>BS Information Technology</dd></div>
+            <div><dt>[ main focus ]</dt><dd>Web, UI and UX</dd></div>
+          </dl>
+
+          <h1 class="hx-title"><span class="hx-a">Gunther</span> <span class="hx-b">Lee</span></h1>
+
+          <div class="hx-left">
+            <p class="hx-tag">[ <span id="typewriter"></span><span class="caret">_</span> ]</p>
+            <p class="hx-bio">Web developer and Information Technology student driven to craft efficient, visually striking web solutions. Skilled in PHP, Python and SQL.</p>
+            <ul class="hx-stack"><li><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/html5/html5-original.svg" alt="" width="14" height="14">HTML</li><li><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/css3/css3-original.svg" alt="" width="14" height="14">CSS</li><li><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/javascript/javascript-original.svg" alt="" width="14" height="14">JS</li><li><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/php/php-original.svg" alt="" width="14" height="14">PHP</li><li><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/python/python-original.svg" alt="" width="14" height="14">Python</li></ul>
+            <a class="hx-btn hx-btn-gold" href="#contact">[ Contact ]</a>
+            <ul class="hx-links">
+              <li><a href="#projects">Explore projects</a></li>
+              <li><a href="files/Gunther-Lee-Ordinario-CV.pdf" download>Download CV</a></li>
+              <li><a href="files/Gunther-Lee-Ordinario-CV.pdf" target="_blank" rel="noopener">View resume</a></li>
+              <li><a href="https://github.com/Clumsy0717" target="_blank" rel="noopener">GitHub</a></li>
+            </ul>
           </div>
 
-          <div class="card-photo" id="revealCard">
-            <img src="images/Right Picture.png" alt="Portrait of Gunther Lee" />
-            <div class="spotlight-layer" id="spotlightLayer"></div>
-          </div>
+          <p class="hx-right">&mdash; Open for honor and work. Let's build something with purpose.</p>
+        </div>
 
-          <div class="card-info">
-            <div class="card-head">
-              <div>
-                <h3 class="card-title">Gunther Lee</h3>
-                <p class="card-sub">Web Developer</p>
-              </div>
-              <span class="card-badge">Web Dev &amp; UI</span>
-            </div>
-
-            <div class="card-tags">
-              <span class="mini-tag"><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/html5/html5-original.svg" alt="" width="14" height="14">HTML</span>
-              <span class="mini-tag"><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/css3/css3-original.svg" alt="" width="14" height="14">CSS</span>
-              <span class="mini-tag"><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/javascript/javascript-original.svg" alt="" width="14" height="14">JS</span>
-              <span class="mini-tag"><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/php/php-original.svg" alt="" width="14" height="14">PHP</span>
-              <span class="mini-tag"><img class="tech-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/python/python-original.svg" alt="" width="14" height="14">Python</span>
-            </div>
-
-            <div class="card-foot">
-              <span>Philippines (UTC+8)</span>
-            </div>
-          </div>
+        <!-- The portrait lives above both layers so it can travel into the next section -->
+        <div class="hx-portrait" aria-hidden="false">
+          <img id="heroPortrait" src="images/Right Picture.png" alt="Portrait of Gunther Lee" />
         </div>
       </div>
     </section>
