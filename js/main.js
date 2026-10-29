@@ -402,8 +402,7 @@ function setupThemeToggle() {
   const root = document.documentElement;
   const metaTheme = document.querySelector('meta[name="theme-color"]');
 
-  // The portfolio always opens in light mode; the toggle only changes the current visit.
-  root.setAttribute('data-theme', 'light');
+  // Respect the page default and let the toggle switch both themes.
   if (!toggle) return;
 
   toggle.addEventListener('click', () => {

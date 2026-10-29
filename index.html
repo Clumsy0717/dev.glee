@@ -114,9 +114,9 @@
       <nav aria-label="Main">
         <ul class="nav-menu" id="navMenu">
           <li><a class="nav-link" href="#hero">Home</a></li>
+          <li><a class="nav-link" href="#skills">Tech Stack</a></li>
           <li><a class="nav-link" href="#projects">Projects</a></li>
           <li><a class="nav-link" href="#journey">Journey</a></li>
-          <li><a class="nav-link" href="#skills">Tech Stack</a></li>
           <li class="nav-menu-contact"><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -141,21 +141,50 @@
     <section class="scene" id="hero" aria-label="Introduction">
       <div class="stage">
 
-        <!-- Next section (revealed by scrolling) -->
+        <!-- TECH STACK + PHILOSOPHY LAYER (revealed as the hero scrolls away) -->
         <div class="philo">
           <div class="philo-grid" aria-hidden="true"></div>
-          <p class="philo-label">[ philosophy ]</p>
-          <h2 class="philo-title">Honor resides in precision, discipline and constant growth.</h2>
+
+          <div class="philo-copy">
+            <p class="philo-label">[ tech stack ]</p>
+            <h2 class="philo-title">Honor resides in precision, discipline and constant growth.</h2>
+          </div>
 
           <div class="philo-aside">
             <p>Every line of code is written with purpose. I combine technical discipline with sharp frontend execution.</p>
             <a class="hx-btn hx-btn-gold" href="#journey">[ My Journey ]</a>
           </div>
 
+          <div class="philo-tech" id="skills" aria-label="Tech stack and GitHub activity">
+            <p class="philo-tech-label">[ tech stack ]</p>
+            <div class="arsenal" id="skillsContainer"></div>
+
+            <div class="activity" id="activity">
+              <div class="activity-head">
+                <h3 class="activity-title">GitHub Activity Log</h3>
+                <a class="btn btn-ghost btn-sm" href="https://github.com/Clumsy0717" target="_blank" rel="noopener noreferrer">@Clumsy0717</a>
+              </div>
+              <div class="activity-body" id="activityBody">
+                <p class="activity-status">Loading activity...</p>
+              </div>
+              <div class="activity-foot" id="activityFoot" hidden>
+                <span id="activityTotal"></span>
+                <span class="legend" aria-hidden="true">
+                  Less
+                  <span class="legend-cell lv0"></span>
+                  <span class="legend-cell lv1"></span>
+                  <span class="legend-cell lv2"></span>
+                  <span class="legend-cell lv3"></span>
+                  <span class="legend-cell lv4"></span>
+                  More
+                </span>
+              </div>
+            </div>
+          </div>
+
           <ul class="philo-cards">
             <li class="philo-card philo-card-a">
               <div class="philo-frame" id="portraitSlot"><img class="slot-img" src="images/Right Picture.png" alt="" /></div>
-              <p>Precision</p>
             </li>
           </ul>
         </div>
@@ -243,40 +272,6 @@
         <div class="about-panel" id="panel-certifications" role="tabpanel" aria-labelledby="tab-certifications" hidden>
           <p class="panel-note">Click a certificate to view it in full.</p>
           <div class="cert-grid" id="certificatesContainer"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section class="section section-alt" id="skills">
-      <div class="container">
-        <div class="section-head">
-          <h2 class="section-title">Tech Stack</h2>
-          <p class="section-intro">Mastery over modern front-end design, responsive user interfaces, and the logic that underpins them.</p>
-        </div>
-
-        <div class="arsenal" id="skillsContainer"></div>
-
-        <div class="activity" id="activity">
-          <div class="activity-head">
-            <h3 class="activity-title">GitHub Activity Log</h3>
-            <a class="btn btn-ghost btn-sm" href="https://github.com/Clumsy0717" target="_blank" rel="noopener">@Clumsy0717</a>
-          </div>
-          <div class="activity-body" id="activityBody">
-            <p class="activity-status">Loading activity...</p>
-          </div>
-          <div class="activity-foot" id="activityFoot" hidden>
-            <span id="activityTotal"></span>
-            <span class="legend" aria-hidden="true">
-              Less
-              <span class="legend-cell lv0"></span>
-              <span class="legend-cell lv1"></span>
-              <span class="legend-cell lv2"></span>
-              <span class="legend-cell lv3"></span>
-              <span class="legend-cell lv4"></span>
-              More
-            </span>
-          </div>
         </div>
       </div>
     </section>

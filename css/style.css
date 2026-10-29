@@ -33,6 +33,22 @@
   --col-gap:   clamp(2.5rem, 5vw, 4.5rem);
 
   --nav-h: 76px;
+
+  --scene-bg: #111216;
+  --scene-grid: rgba(255, 255, 255, 0.055);
+  --scene-text: #eceae4;
+  --scene-muted: #c9c7c0;
+  --scene-label: #9a9da6;
+  --hero-paper: #171920;
+  --hero-ink: #e6e4df;
+  --hero-ink-soft: #b7b5ae;
+  --tech-panel: #1b1d22;
+  --tech-chip: #15161a;
+  --bamboo-0: #252a28;
+  --bamboo-1: #294d36;
+  --bamboo-2: #39754a;
+  --bamboo-3: #58a66a;
+  --bamboo-4: #9bd18c;
 }
 
 /* DIRECTOR'S CUT LIGHT MODE */
@@ -51,6 +67,22 @@
   
   --border:      rgba(196, 154, 43, 0.3);
   --border-strong: rgba(24, 24, 22, 0.2);
+
+  --scene-bg: #e9e4d9;
+  --scene-grid: rgba(24, 24, 22, 0.075);
+  --scene-text: #181816;
+  --scene-muted: #595752;
+  --scene-label: #68645d;
+  --hero-paper: #efede8;
+  --hero-ink: #181816;
+  --hero-ink-soft: #3a3c43;
+  --tech-panel: #f0ece2;
+  --tech-chip: #f8f5ed;
+  --bamboo-0: #d7d2c6;
+  --bamboo-1: #c3d5b7;
+  --bamboo-2: #9dbd8d;
+  --bamboo-3: #6f9e65;
+  --bamboo-4: #39764b;
 }
 
 [data-theme="light"] body {
@@ -693,17 +725,21 @@ body.ready .hero-card { animation: rise 0.8s 0.15s cubic-bezier(0.2, 0.7, 0.2, 1
 }
 .heatmap-cell,
 .legend-cell {
-  aspect-ratio: 1;
-  border-radius: 2px;
+  aspect-ratio: 0.66;
+  min-height: 12px;
+  border-radius: 4px 4px 3px 3px;
+  border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+  box-shadow: inset 1px 0 rgba(255,255,255,.12), inset -1px 0 rgba(0,0,0,.08);
+  background-image: linear-gradient(to bottom, transparent 0 42%, rgba(12, 18, 12, .16) 42% 48%, transparent 48% 100%);
 }
-.lv0 { background: rgba(255, 255, 255, 0.04); }
-.lv1 { background: rgba(229, 193, 88, 0.3); }
-.lv2 { background: rgba(229, 193, 88, 0.55); }
-.lv3 { background: rgba(229, 193, 88, 0.8); }
-.lv4 { background: var(--gold); }
+.lv0 { color: var(--muted); background-color: var(--bamboo-0); opacity: .72; }
+.lv1 { color: var(--bamboo-1); background-color: var(--bamboo-1); }
+.lv2 { color: var(--bamboo-2); background-color: var(--bamboo-2); }
+.lv3 { color: var(--bamboo-3); background-color: var(--bamboo-3); }
+.lv4 { color: var(--bamboo-4); background-color: var(--bamboo-4); }
 
 .legend { display: inline-flex; align-items: center; gap: 4px; }
-.legend-cell { width: 12px; height: 12px; }
+.legend-cell { width: 12px; height: 12px; min-height: 12px; aspect-ratio: 1; border-radius: 3px; }
 .legend-cell:first-of-type { margin-left: 0.25rem; }
 .legend-cell:last-of-type  { margin-right: 0.25rem; }
 
@@ -1215,7 +1251,7 @@ body.is-loading { overflow: hidden; }
 ============================================================ */
 :root { --nav-bg: rgba(17, 18, 22, 0.88); }
 [data-theme="light"] { --nav-bg: rgba(244, 241, 234, 0.9); }
-[data-theme="light"] .lv0 { background: rgba(24, 24, 22, 0.08); }
+[data-theme="light"] .lv0 { background-color: var(--bamboo-0); }
 [data-theme="light"] .input::placeholder { color: #8a8780; }
 
 /* Typography and rhythm */
@@ -1984,8 +2020,8 @@ button, a, .btn, .about-tab, .filter, .skill-chip { touch-action: manipulation; 
 }
 @supports (height: 100svh) { :root { --hx-h: calc(100svh - var(--nav-h) - 20px); } }
 
-.scene { position: relative; margin-top: calc(-1 * var(--nav-h)); background: var(--ink-dark); }
-.stage { position: relative; min-height: 600px; background: var(--ink-dark); overflow: hidden; }
+.scene { position: relative; margin-top: calc(-1 * var(--nav-h)); background: var(--scene-bg); }
+.stage { position: relative; min-height: 600px; background: var(--scene-bg); overflow: hidden; }
 .scene-live { height: 270vh; }
 .scene-live .stage { position: sticky; top: 0; height: 100vh; }
 @supports (height: 100svh) { .scene-live .stage { height: 100svh; } }
@@ -2000,9 +2036,9 @@ button, a, .btn, .about-tab, .filter, .skill-chip { touch-action: manipulation; 
   z-index: 2;
   overflow: hidden;
   border-radius: 28px;
-  color: var(--ink);
+  color: var(--hero-ink);
 }
-.hx-bg { position: absolute; inset: 0; background: var(--paper); }
+.hx-bg { position: absolute; inset: 0; background: var(--hero-paper); }
 
 .hx-facts {
   position: absolute;
@@ -2015,7 +2051,7 @@ button, a, .btn, .about-tab, .filter, .skill-chip { touch-action: manipulation; 
   margin: 0;
   font-size: 0.92rem;
 }
-.hx-facts dt { color: #6a6c73; font-size: 0.8rem; }
+.hx-facts dt { color: var(--muted); font-size: 0.8rem; }
 .hx-facts dd { margin: 0.15rem 0 0; font-weight: 700; }
 
 /* Giant name, set behind the portrait */
@@ -2027,18 +2063,18 @@ button, a, .btn, .about-tab, .filter, .skill-chip { touch-action: manipulation; 
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: clamp(0.5rem, 2vw, 2rem);
+  gap: clamp(0.75rem, 1.6vw, 1.5rem);
   margin: 0;
-  padding-inline: clamp(1.25rem, 2.8vw, 2.75rem);
+  padding-inline: clamp(5rem, 10vw, 10rem);
   font-family: var(--font-poster);
   font-size: clamp(4.5rem, 12.2vw, 12.5rem);
   line-height: 0.9;
   text-transform: uppercase;
   letter-spacing: -0.035em;
-  color: var(--ink);
+  color: var(--hero-ink);
 }
 .hx-a { font-weight: 700; white-space: nowrap; }
-.hx-b { font-weight: 200; color: #3a3c43; white-space: nowrap; }
+.hx-b { font-weight: 200; color: var(--hero-ink-soft); white-space: nowrap; }
 
 .hx-left {
   position: absolute;
@@ -2050,12 +2086,12 @@ button, a, .btn, .about-tab, .filter, .skill-chip { touch-action: manipulation; 
   align-items: flex-start;
   gap: 0.9rem;
 }
-.hx-tag { margin: 0; font: 500 0.95rem/1 var(--font-poster); letter-spacing: 0.06em; text-transform: uppercase; color: #3a3c43; }
-.hx-bio { margin: 0; font-size: 0.98rem; line-height: 1.5; color: #2a2c32; }
+.hx-tag { margin: 0; font: 500 0.95rem/1 var(--font-poster); letter-spacing: 0.06em; text-transform: uppercase; color: var(--hero-ink-soft); }
+.hx-bio { margin: 0; font-size: 0.98rem; line-height: 1.5; color: var(--hero-ink-soft); }
 .hx-stack { display: flex; flex-wrap: wrap; gap: 0.4rem 0.9rem; margin: 0; padding: 0; list-style: none; }
-.hx-stack li { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 600; color: #2a2c32; }
+.hx-stack li { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 600; color: var(--hero-ink-soft); }
 .hx-links { display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; margin: 0; padding: 0; list-style: none; }
-.hx-links a { font-size: 0.88rem; color: #4a4c53; text-decoration: underline; text-decoration-color: rgba(20, 21, 26, 0.25); text-underline-offset: 4px; transition: color 0.2s var(--ease-out), text-decoration-color 0.2s var(--ease-out); }
+.hx-links a { font-size: 0.88rem; color: var(--hero-ink-soft); text-decoration: underline; text-decoration-color: rgba(20, 21, 26, 0.25); text-underline-offset: 4px; transition: color 0.2s var(--ease-out), text-decoration-color 0.2s var(--ease-out); }
 .hx-right {
   position: absolute;
   right: clamp(1rem, 2.6vw, 2.25rem);
@@ -2065,7 +2101,7 @@ button, a, .btn, .about-tab, .filter, .skill-chip { touch-action: manipulation; 
   text-align: right;
   font-size: 0.95rem;
   line-height: 1.45;
-  color: #2a2c32;
+  color: var(--hero-ink-soft);
 }
 
 .hx-btn {
@@ -2080,10 +2116,10 @@ button, a, .btn, .about-tab, .filter, .skill-chip { touch-action: manipulation; 
   border-radius: 3px;
   transition: background-color 0.2s var(--ease-out), transform 0.16s var(--ease-out);
 }
-.hx-btn-gold { color: var(--ink); background: var(--gold-btn); }
+.hx-btn-gold { color: #17181c; background: var(--gold); }
 .hx-btn:active { transform: scale(0.97); }
 @media (hover: hover) {
-  .hx-btn-gold:hover { background: #e7c766; }
+  .hx-btn-gold:hover { background: var(--gold-hover); }
   .hx-links a:hover { color: var(--ink); text-decoration-color: var(--gold-btn); }
 }
 
@@ -2105,7 +2141,7 @@ button, a, .btn, .about-tab, .filter, .skill-chip { touch-action: manipulation; 
   width: auto;
   max-width: none;
   transform-origin: 0 0;
-  filter: grayscale(1) contrast(1.06);
+  filter: contrast(1.04) saturate(1.02);
   will-change: transform;
   transform: translate(calc(var(--m, 0) * var(--dx, 0px)), calc(var(--m, 0) * var(--dy, 0px))) scale(calc(1 + var(--m, 0) * (var(--ds, 1) - 1)));
 }
@@ -2118,19 +2154,19 @@ button, a, .btn, .about-tab, .filter, .skill-chip { touch-action: manipulation; 
   margin-top: calc(var(--hx-top) + var(--hx-h) + 12px);
   padding: calc(var(--nav-h) + 3.5rem) 5vw 3rem;
   overflow: hidden;
-  color: #eceae4;
-  background: var(--ink-dark);
+  color: var(--scene-text);
+  background: var(--scene-bg);
 }
 .philo-grid {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+    linear-gradient(var(--scene-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--scene-grid) 1px, transparent 1px);
   background-size: min(9vw, 130px) min(9vw, 130px);
   pointer-events: none;
 }
-.philo-label { position: relative; margin: 0 0 1.1rem; font-size: 0.85rem; color: #9a9da6; }
+.philo-label { position: relative; margin: 0 0 1.1rem; font-size: 0.85rem; color: var(--scene-label); }
 .philo-title {
   position: relative;
   max-width: 14em;
@@ -2140,7 +2176,7 @@ button, a, .btn, .about-tab, .filter, .skill-chip { touch-action: manipulation; 
   font-weight: 700;
   line-height: 0.98;
   text-transform: uppercase;
-  color: #f1efe9;
+  color: var(--scene-text);
 }
 .philo-aside {
   position: absolute;
@@ -2148,7 +2184,7 @@ button, a, .btn, .about-tab, .filter, .skill-chip { touch-action: manipulation; 
   top: calc(var(--nav-h) + 3.5rem);
   width: min(20rem, 26vw);
 }
-.philo-aside p { margin: 0 0 1.25rem; font-size: 1rem; line-height: 1.55; color: #c9c7c0; }
+.philo-aside p { margin: 0 0 1.25rem; font-size: 1rem; line-height: 1.55; color: var(--scene-muted); }
 .philo-cards { margin: 0; padding: 0; list-style: none; }
 .philo-card { position: absolute; margin: 0; }
 .philo-card-a { left: 10vw; bottom: 8vh; }
@@ -2157,10 +2193,10 @@ button, a, .btn, .about-tab, .filter, .skill-chip { touch-action: manipulation; 
   width: clamp(110px, min(17vw, 27vh), 280px);
   aspect-ratio: var(--portrait-ratio, 0.8);
   overflow: hidden;
-  background: #26282e;
+  background: var(--tech-panel);
 }
-.philo-frame img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); }
-.philo-card p { margin: 0.6rem 0 0; font: 500 0.82rem/1 var(--font-poster); letter-spacing: 0.05em; text-transform: uppercase; color: #c9c7c0; }
+.philo-frame img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.04) saturate(1.02); }
+.philo-card p { margin: 0.6rem 0 0; font: 500 0.82rem/1 var(--font-poster); letter-spacing: 0.05em; text-transform: uppercase; color: var(--scene-muted); }
 
 /* Live mode: scroll variables drive the transformation */
 .scene-live .stage { --a: 0; --b: 0; --m: 0; --c: 0; --d: 0; --dx: 0px; --dy: 0px; --ds: 1; }
@@ -2183,7 +2219,7 @@ button, a, .btn, .about-tab, .filter, .skill-chip { touch-action: manipulation; 
 .scene-live .philo-label, .scene-live .philo-title { opacity: var(--c); transform: translateY(calc((1 - var(--c)) * 36px)); }
 .scene-live .philo-aside { opacity: var(--d); transform: translateY(calc((1 - var(--d)) * 36px)); }
 .scene-live .philo-card-a p { opacity: var(--d); }
-.scene-live #portraitSlot { background-color: rgb(38 40 46 / var(--m)); }
+.scene-live #portraitSlot { background-color: color-mix(in srgb, var(--tech-panel) calc(var(--m) * 100%), transparent); }
 .scene-live .slot-img { display: none; }
 
 /* Entrance after the loader */
@@ -2214,4 +2250,385 @@ body.ready .hx-facts, body.ready .hx-left, body.ready .hx-right { animation: fad
   .philo-aside p { font-size: 0.92rem; margin-bottom: 0.9rem; }
   .philo-frame { width: clamp(110px, 30vw, 220px); }
   .philo-card-a { left: 6vw; bottom: 3svh; }
+}
+/* ============================================================
+   TECH STACK REVEAL — integrated into the scroll-driven philosophy scene
+   The original light hero and moving portrait remain intact.
+============================================================ */
+.philo-copy {
+  position: relative;
+  z-index: 1;
+  width: min(43%, 48rem);
+}
+.philo-tech-label {
+  margin: 0 0 0.65rem;
+  color: var(--gold-btn, #d9b44a);
+  font: 500 0.72rem/1.2 var(--font-mono, monospace);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.philo-tech {
+  position: absolute;
+  z-index: 2;
+  top: calc(var(--nav-h) + 8.6rem);
+  right: 4.5vw;
+  width: min(49%, 56rem);
+  opacity: var(--c, 0);
+  transform: translateY(calc((1 - var(--c, 0)) * 34px));
+  transition: opacity 0.18s linear;
+}
+.philo-tech .arsenal {
+  margin: 0 0 1rem;
+  overflow: hidden;
+  color: var(--text);
+  background: var(--tech-panel);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  box-shadow: 0 18px 48px rgb(0 0 0 / 0.14);
+}
+.philo-tech .arsenal-row {
+  grid-template-columns: minmax(8.5rem, 0.36fr) minmax(0, 1fr);
+  gap: 0.85rem;
+  padding: 0.85rem 1rem;
+}
+.philo-tech .arsenal-row + .arsenal-row { border-top-color: var(--border); }
+.philo-tech .arsenal-label h3 { color: var(--text); }
+.philo-tech .arsenal-jp { color: #c82e35; }
+.philo-tech .arsenal-items { gap: 0.45rem; }
+.philo-tech .skill-chip {
+  min-height: 38px;
+  padding: 0.45rem 0.7rem;
+  color: var(--text);
+  background: var(--tech-chip);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  font-size: 0.78rem;
+}
+.philo-tech .activity {
+  margin: 0;
+  color: var(--text);
+  background: var(--tech-panel);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  box-shadow: 0 18px 48px rgb(0 0 0 / 0.14);
+}
+.philo-tech .activity-head {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.philo-tech .activity-title { color: var(--text); font-size: 1rem; }
+.philo-tech .activity-head .btn { min-height: 32px; padding: 0.35rem 0.65rem; }
+.philo-tech .activity-body { padding: 0.8rem 1rem; overflow-x: auto; }
+.philo-tech .activity-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  font-size: 0.72rem;
+}
+.philo-tech .activity-status { color: var(--muted); }
+.philo-tech .legend { gap: 0.18rem; color: var(--muted); }
+.philo-tech .legend-cell { width: 9px; height: 9px; }
+.philo-tech .philo-tech-label { margin-bottom: 0.6rem; }
+
+/* Match the reference composition: statement at upper-left, tools at right,
+   portrait landing at lower-left. The existing JS still animates the portrait. */
+.scene-live .philo-label,
+.scene-live .philo-title { opacity: var(--c); transform: translateY(calc((1 - var(--c)) * 36px)); }
+.scene-live .philo-tech { pointer-events: none; }
+.scene-live .hero-gone .philo-tech { pointer-events: auto; }
+.scene-live .philo-card-a { z-index: 3; }
+
+@media (min-width: 1001px) {
+  .philo { padding-top: calc(var(--nav-h) + 2.8rem); }
+  .philo-title { max-width: 9.5em; font-size: clamp(2.2rem, 4.05vw, 4.2rem); }
+  .philo-aside { top: calc(var(--nav-h) + 2.6rem); width: min(18rem, 22vw); }
+  .philo-tech { top: calc(var(--nav-h) + 7.7rem); }
+  .philo-card-a { left: 7.5vw; bottom: 7vh; }
+  .philo-frame { width: clamp(135px, 14vw, 245px); }
+}
+
+@media (max-width: 1000px) {
+  .philo-copy { width: 100%; }
+  .philo-tech {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    margin-top: 1.5rem;
+    padding-bottom: 14rem;
+    opacity: 1;
+    transform: none;
+  }
+  .scene-live .philo-tech { pointer-events: auto; }
+  .philo-tech .arsenal-row { grid-template-columns: minmax(0, 1fr); }
+  .philo-tech .activity-body { min-width: 0; }
+  .philo-tech .activity-foot { flex-wrap: wrap; }
+  .philo-card-a { bottom: 2rem; }
+}
+
+@media (max-width: 600px) {
+  .philo-tech { padding-bottom: 12rem; }
+  .philo-tech .arsenal-row { padding: 0.75rem; }
+  .philo-tech .activity-head { flex-wrap: wrap; }
+  .philo-tech .activity-title { font-size: 0.95rem; }
+  .philo-tech .activity-body { padding: 0.65rem; }
+  .philo-tech .activity-foot { align-items: flex-start; }
+}
+
+/* Mobile: let the scene become a normal document flow instead of clipping
+   the integrated Tech Stack panel inside the pinned desktop stage. */
+@media (max-width: 1000px) {
+  .scene-live { height: auto; }
+  .scene-live .stage {
+    position: relative;
+    top: auto;
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+  }
+  .scene-live .philo {
+    position: relative;
+    inset: auto;
+    margin-top: calc(var(--hx-top) + var(--hx-h) + 12px);
+    min-height: 100vh;
+    padding-bottom: 2rem;
+    pointer-events: auto;
+  }
+  .scene-live .philo-grid { opacity: 1; }
+  .scene-live .philo-label,
+  .scene-live .philo-title,
+  .scene-live .philo-aside,
+  .scene-live .philo-tech {
+    opacity: 1;
+    transform: none;
+  }
+  .scene-live .philo-card-a {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    margin-top: 1.5rem;
+  }
+  .scene-live .philo-frame { width: clamp(110px, 30vw, 190px); }
+  .scene-live .hx-portrait { position: absolute; }
+}
+
+/* ============================================================
+   EDITORIAL POLISH — restrained refinements to the scroll scene
+   Keeps the original composition, palette, and portrait transition.
+============================================================ */
+@media (min-width: 1001px) {
+  .philo {
+    padding-left: clamp(3rem, 5vw, 5.5rem);
+    padding-right: clamp(3rem, 5vw, 5.5rem);
+  }
+
+  .philo-copy {
+    width: min(43%, 42rem);
+  }
+
+  .philo-title {
+    max-width: 10.2em;
+    font-size: clamp(2.35rem, 3.85vw, 4.15rem);
+    line-height: 0.99;
+    letter-spacing: -0.018em;
+    text-wrap: balance;
+  }
+
+  .philo-aside {
+    right: clamp(3rem, 5vw, 5.5rem);
+    width: min(17rem, 21vw);
+  }
+
+  .philo-tech {
+    top: calc(var(--nav-h) + 7.9rem);
+    right: clamp(3rem, 5vw, 5.5rem);
+    width: min(48%, 54rem);
+  }
+
+  .philo-tech-label {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .philo-tech-label::after {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 1px;
+    background: #d9b44a;
+    opacity: 0.8;
+  }
+
+  .philo-tech .arsenal,
+  .philo-tech .activity {
+    border-radius: 4px;
+    box-shadow: 0 8px 22px rgb(0 0 0 / 0.10);
+  }
+
+  .philo-tech .arsenal-row {
+    grid-template-columns: minmax(8.1rem, 0.32fr) minmax(0, 1fr);
+    padding: 0.78rem 1rem;
+    gap: 0.9rem;
+  }
+
+  .philo-tech .arsenal-label {
+    gap: 0.7rem;
+  }
+
+  .philo-tech .arsenal-jp {
+    font-size: 1.65rem;
+  }
+
+  .philo-tech .arsenal-label h3 {
+    font-size: 0.88rem;
+    letter-spacing: 0.075em;
+  }
+
+  .philo-tech .skill-chip {
+    min-height: 35px;
+    padding: 0.38rem 0.62rem;
+    gap: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.76rem;
+    transition: border-color 180ms ease, background-color 180ms ease;
+  }
+
+  .philo-tech .skill-chip:hover {
+    transform: none;
+    background: #fffdf7;
+    border-color: #c49a2b;
+  }
+
+  .philo-tech .skill-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .philo-tech .activity-head {
+    padding: 0.78rem 1rem;
+  }
+
+  .philo-tech .activity-title {
+    font-size: 0.98rem;
+    letter-spacing: 0.005em;
+  }
+
+  .philo-tech .activity-body {
+    padding: 0.7rem 0.9rem;
+  }
+
+  .philo-tech .activity-foot {
+    padding: 0.62rem 1rem;
+  }
+}
+
+/* Keep the handoff portrait and the skill panel from feeling crowded on tablets. */
+@media (min-width: 601px) and (max-width: 1000px) {
+  .philo {
+    padding-inline: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .philo-tech {
+    margin-top: 1.75rem;
+    padding-bottom: 2rem;
+  }
+
+  .philo-tech .arsenal,
+  .philo-tech .activity {
+    border-radius: 5px;
+    box-shadow: 0 6px 20px rgb(0 0 0 / 0.10);
+  }
+}
+
+@media (max-width: 600px) {
+  .philo {
+    padding-inline: 1.1rem;
+    padding-top: calc(var(--nav-h) + 1.4rem);
+  }
+
+  .philo-title {
+    max-width: 12em;
+    font-size: clamp(1.8rem, 8.2vw, 2.65rem);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+  }
+
+  .philo-tech {
+    margin-top: 1.4rem;
+    padding-bottom: 0;
+  }
+
+  .philo-tech .arsenal,
+  .philo-tech .activity {
+    border-radius: 4px;
+    box-shadow: none;
+  }
+
+  .philo-tech .arsenal-row {
+    gap: 0.65rem;
+    padding: 0.85rem 0.8rem;
+  }
+
+  .philo-tech .arsenal-label h3 {
+    font-size: 0.84rem;
+  }
+
+  .philo-tech .skill-chip {
+    min-height: 34px;
+    padding: 0.35rem 0.55rem;
+    font-size: 0.75rem;
+  }
+
+  .philo-tech .activity-body {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .philo-tech .activity-foot {
+    gap: 0.6rem;
+    font-size: 0.68rem;
+  }
+
+  .philo-card-a {
+    margin-top: 1.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .philo-tech .skill-chip,
+  .philo-tech .arsenal,
+  .philo-tech .activity {
+    transition: none !important;
+  }
+}
+
+/* Name spacing and full-colour portrait refinement */
+.hx-title {
+  justify-content: center;
+  gap: clamp(1.25rem, 7vw, 8rem);
+}
+
+/* Keep the portrait in its original colours in both scroll states. */
+.hx-portrait img,
+.philo-frame img {
+  filter: none !important;
+}
+
+@media (max-width: 900px) and (min-width: 641px) {
+  .hx-title {
+    gap: clamp(1rem, 4vw, 3rem);
+    font-size: clamp(4rem, 10.5vw, 8rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .hx-title {
+    gap: 0.02em;
+  }
 }
