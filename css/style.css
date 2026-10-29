@@ -2027,17 +2027,18 @@ button, a, .btn, .about-tab, .filter, .skill-chip { touch-action: manipulation; 
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  gap: clamp(0.5rem, 2vw, 2rem);
   margin: 0;
-  padding-inline: clamp(1rem, 3vw, 3rem);
+  padding-inline: clamp(1.25rem, 2.8vw, 2.75rem);
   font-family: var(--font-poster);
-  font-size: clamp(5rem, 13.5vw, 14rem);
-  line-height: 0.86;
+  font-size: clamp(4.5rem, 12.2vw, 12.5rem);
+  line-height: 0.9;
   text-transform: uppercase;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.035em;
   color: var(--ink);
 }
-.hx-a { font-weight: 700; }
-.hx-b { font-weight: 200; color: #3a3c43; }
+.hx-a { font-weight: 700; white-space: nowrap; }
+.hx-b { font-weight: 200; color: #3a3c43; white-space: nowrap; }
 
 .hx-left {
   position: absolute;
@@ -2151,8 +2152,7 @@ button, a, .btn, .about-tab, .filter, .skill-chip { touch-action: manipulation; 
 .philo-cards { margin: 0; padding: 0; list-style: none; }
 .philo-card { position: absolute; margin: 0; }
 .philo-card-a { left: 10vw; bottom: 8vh; }
-.philo-card-b { left: 56vw; bottom: 4vh; }
-@supports (height: 100svh) { .philo-card-a { bottom: 8svh; } .philo-card-b { bottom: 4svh; } }
+@supports (height: 100svh) { .philo-card-a { bottom: 8svh; } }
 .philo-frame {
   width: clamp(110px, min(17vw, 27vh), 280px);
   aspect-ratio: var(--portrait-ratio, 0.8);
@@ -2181,7 +2181,7 @@ button, a, .btn, .about-tab, .filter, .skill-chip { touch-action: manipulation; 
 .scene-live .hero-gone .hx-card { visibility: hidden; }
 .scene-live .philo-grid { opacity: var(--b); }
 .scene-live .philo-label, .scene-live .philo-title { opacity: var(--c); transform: translateY(calc((1 - var(--c)) * 36px)); }
-.scene-live .philo-aside, .scene-live .philo-card-b { opacity: var(--d); transform: translateY(calc((1 - var(--d)) * 36px)); }
+.scene-live .philo-aside { opacity: var(--d); transform: translateY(calc((1 - var(--d)) * 36px)); }
 .scene-live .philo-card-a p { opacity: var(--d); }
 .scene-live #portraitSlot { background-color: rgb(38 40 46 / var(--m)); }
 .scene-live .slot-img { display: none; }
@@ -2199,7 +2199,7 @@ body.ready .hx-facts, body.ready .hx-left, body.ready .hx-right { animation: fad
 @media (max-width: 1000px) {
   .hx-card { border-radius: 22px; }
   .hx-facts div:nth-child(2) { display: none; }
-  .hx-title { top: 12%; flex-direction: column; align-items: flex-start; font-size: clamp(3.5rem, 18.5vw, 11rem); }
+  .hx-title { top: 13%; flex-direction: column; align-items: flex-start; gap: 0.02em; font-size: clamp(3.25rem, 15vw, 8.5rem); line-height: 0.82; padding-inline: clamp(1rem, 4vw, 2rem); }
   .hx-b { align-self: flex-end; }
   .hx-portrait { padding-bottom: calc(var(--hx-h) * 0.34); }
   .hx-portrait img { height: 64%; }
@@ -2214,5 +2214,4 @@ body.ready .hx-facts, body.ready .hx-left, body.ready .hx-right { animation: fad
   .philo-aside p { font-size: 0.92rem; margin-bottom: 0.9rem; }
   .philo-frame { width: clamp(110px, 30vw, 220px); }
   .philo-card-a { left: 6vw; bottom: 3svh; }
-  .philo-card-b { left: 50vw; bottom: 7svh; }
 }

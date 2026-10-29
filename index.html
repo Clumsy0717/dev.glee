@@ -114,9 +114,9 @@
       <nav aria-label="Main">
         <ul class="nav-menu" id="navMenu">
           <li><a class="nav-link" href="#hero">Home</a></li>
+          <li><a class="nav-link" href="#projects">Projects</a></li>
           <li><a class="nav-link" href="#journey">Journey</a></li>
           <li><a class="nav-link" href="#skills">Skills</a></li>
-          <li><a class="nav-link" href="#projects">Projects</a></li>
           <li class="nav-menu-contact"><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -157,10 +157,6 @@
               <div class="philo-frame" id="portraitSlot"><img class="slot-img" src="images/Right Picture.png" alt="" /></div>
               <p>Precision</p>
             </li>
-            <li class="philo-card philo-card-b">
-              <div class="philo-frame"><img src="images/Picture2.jpg" alt="Gunther Lee" /></div>
-              <p>Purpose</p>
-            </li>
           </ul>
         </div>
 
@@ -174,7 +170,7 @@
             <div><dt>[ main focus ]</dt><dd>Web, UI and UX</dd></div>
           </dl>
 
-          <h1 class="hx-title"><span class="hx-a">Gunther</span> <span class="hx-b">Lee</span></h1>
+          <h1 class="hx-title" aria-label="Gunther Lee"><span class="hx-a">Gunther</span><span class="hx-b">Lee</span></h1>
 
           <div class="hx-left">
             <p class="hx-tag">[ <span id="typewriter"></span><span class="caret">_</span> ]</p>
@@ -198,6 +194,29 @@
         </div>
       </div>
     </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Featured Works</h2>
+          <p class="section-intro">A selection of projects built through curiosity, practice, and problem-solving.</p>
+        </div>
+
+        <div class="filters" role="group" aria-label="Filter projects">
+          <button type="button" class="filter active" aria-pressed="true" onclick="filterProjects('all', this)">All Projects</button>
+          <button type="button" class="filter" aria-pressed="false" onclick="filterProjects('live', this)">
+            <span class="status-dot green"></span>Live
+          </button>
+          <button type="button" class="filter" aria-pressed="false" onclick="filterProjects('dev', this)">
+            <span class="status-dot orange"></span>In Development
+          </button>
+        </div>
+
+        <div class="projects-grid" id="projectsContainer"></div>
+      </div>
+    </section>
+
 
     <!-- JOURNEY -->
     <section class="section" id="journey">
@@ -259,25 +278,6 @@
             </span>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section class="section" id="projects">
-      <div class="container">
-        <h2 class="section-title">Featured Works</h2>
-
-        <div class="filters" role="group" aria-label="Filter projects">
-          <button type="button" class="filter active" aria-pressed="true" onclick="filterProjects('all', this)">All Projects</button>
-          <button type="button" class="filter" aria-pressed="false" onclick="filterProjects('live', this)">
-            <span class="status-dot green"></span>Live
-          </button>
-          <button type="button" class="filter" aria-pressed="false" onclick="filterProjects('dev', this)">
-            <span class="status-dot orange"></span>In Development
-          </button>
-        </div>
-
-        <div class="projects-grid" id="projectsContainer"></div>
       </div>
     </section>
 
